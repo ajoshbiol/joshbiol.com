@@ -1,7 +1,28 @@
 body {
-	color: blue;
+	height: 100%;
+	margin: 0;
 }
 
-a {
-	text-decoration: none;
+#navigation {
+	color: red;
+}
+
+#navigationList {
+	list-style: none;
+}
+
+#left {
+	color: yellow;
+	float: left;
+	width: 30%;
+	background-color: black;
+	height: 100%;
+}
+
+#right {
+	color: green;
+	float: left;
+	width: 70%;
+	background-color: purple;
+	height: 100%;
 }

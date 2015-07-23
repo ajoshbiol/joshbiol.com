@@ -5,17 +5,14 @@
 		<link rel="stylesheet" type="text/css" href="theme.css"/>
 		<title>Josh Biol</title>
 		<nav id="navigation">
-		</nav>
-	</head>
-	<body>
-		<div id="left">
-			
-			My Photo will go hereeeee~~
-			<br>
 			<ul id="navigationList">
 				<li><a href="#projects">Projects</a></li>
 				<li><a href="#aboutme">About me</a></li>
 			</ul> 
+		</nav>
+	</head>
+	<body>
+		<div id="left">
 		
 			
 		</div>
