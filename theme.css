@@ -8,7 +8,7 @@ body {
 }
 
 #navigation {
-	color: red;
+	color: black;
 }
 
 #navigationList {
@@ -16,17 +16,40 @@ body {
 }
 
 #left {
-	color: yellow;
 	float: left;
-	width: 30%;
-	background-color: black;
+	width: 33%;
+	background-color: white;
 	height: 100%;
 }
 
+#selfie {
+	display: block;
+	width: 300px;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #right {
-	color: green;
+	color: black;
 	float: left;
-	width: 70%;
-	background-color: purple;
+	width: 67%;
+	background-color: white;
 	height: 100%;
+}
+
+#boulderingInfo {
+	padding-left:1em;
+}
+
+#newsInfo {
+	padding-left:1em;
+}
+
+#interests {
+	font-size: 200%;
+}
+
+#aboutMe {
+	font-size: 200%;
 }
