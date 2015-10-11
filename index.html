@@ -6,6 +6,10 @@
 		<title>Josh Biol</title>
 		<nav id="navigation">
 		</nav>
+		
+		<script src="js/config.js"></script>
+		<script src="js/riotHandler.js"></script>
+		<script src="js/indexHandler.js"></script>
 	</head>
 	<body>
 		<div id="left">
@@ -54,7 +58,11 @@
 					<br>
 						<div id="newsInfo">I really enjoy listening to the local Seattle radion station <a href="http://kuow.org">KUOW</a> 94.9 FM.</div>
 					<br>
+
 					<li>League of Legends</li>
+					
+					<br><button id="matchesToggle" type="button" onclick="handleRecentMatches()">Show recent matches</button>
+					<div id="leagueMatchHistory"></div>
 				</ul>
 			<br>
 		</div>
