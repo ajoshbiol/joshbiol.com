@@ -13,58 +13,83 @@
 	</head>
 	<body>
 		<div id="left">
-			<div id="selfieDiv">
-				<img id="selfie" alt="Profile picture" src="src/self.png">
-			</div>
-			<br/>
 			<ul id="navigationList">
-				<li><a href="#aboutMe">About me</a></li>
-				<li><a href="#interests">Interests</a></li>
+				<li><a href="#home">Home</a></li>
+				<li><a href="#projects">Projects</a>
+					<ul>
+						<li><a href="#sixWordStoriesDiv">Six Word Stories</a></li>
+						<li><a href="#healthDiv">Health</a></li>
+						<li><a href="#foreverWoodLeagueDiv">Forever Wood League</a></li>
+					</ul>
+				</li>
+				<li><a href="#about">About</a></li>
 			</ul> 
 		
-			
 		</div>
-		
 		<div id="right">
 			<br>
-			<a id="aboutMe">About me</a>
-			<p>Hello! <br><br>Welcome to my website! What's here? Information about me! Wait... Do I really want to do that?? Hmm... What the hey! Let's do it!
-				<br>
-				<br>
-				My goal with this website is to learn a little bit about web development. It looks really bare for now because... I don't know much about the front-end realm. 
-				Hehe
-				<br>
-				<br>
-				Whelp hopefully this website gets better in time. Stay tuned! Until then, thank you for checking this out.
-				<br>
-				<br>
-				Don't forget to be awesome,
-				<br>
-				Josh</p>
-			</p>
-			<a id="interests">Interests</a>
-				<ul>
-					<li>Bouldering
-						<br>
-						<br>
-						<div id="boulderingInfo">I am competing on October 10, 2015 for my very first bouldering competition! More information on the event can be found 
-							<a href="http://www.seattleboulderingproject.com">here</a>.
-						</div>
-					</li>
-					<br>
-					<li>Weight lifting</li>
-					<br>
-					<li>Keeping up with local, national, and international news.</li>
-					<br>
-						<div id="newsInfo">I really enjoy listening to the local Seattle radion station <a href="http://kuow.org">KUOW</a> 94.9 FM.</div>
-					<br>
-
-					<li>League of Legends</li>
-					
-					<br><button id="matchesToggle" type="button" onclick="handleRecentMatches()">Show recent matches</button>
-					<div id="leagueMatchHistory"></div>
-				</ul>
+			<a id="home">Home</a>
 			<br>
+			
+			
+			<div id="projectsDiv">
+				<a id="projects">Projects</a>
+				<div id="sixWordStoriesDiv">
+					<a id="sixWordStoriesTitle">Six Word Stories</a>
+					<p>
+					Six Word Stories is a project inspired by a friend. The premise of the project is to express a story in six words only. It may just look like a bunch of
+					nonsense to you but to me this project means a lot. I like this project because it serves an outlet for me to express my inner thoughts and feeling out to 
+					the public without people really understanding what I am saying because they have no context. These six word stories are purposely left ambiguous so that
+					you never really understand what I am thinking but it gives me the catharsis that I needed at the time. This project leverages Twitter as the primary medium in which I release my stories.
+					</p>
+					<p>
+					<div id="sixWordStoriesDisplay">
+					In progress...
+					</div>
+					</p>
+				</div>
+				<div id="heathDiv">
+					<a id="healthTitle">Health</a>
+					<p>
+					In progress...
+					</p>
+				</div>
+				<div id="foreverWoodLeagueDiv">
+					<a id="foreverWoodLeagueTitle">Forever Wood League</a>
+					<p>
+					I sometimes play the video game League of Legends for fun. I am no good at it but I enjoy it because of the people. It's a nice social outlet at the end
+					of the day; playing video games with friends and chatting about our day on teamspeak.
+					</p>
+					<p>
+					Parsing in progress...
+					</p>
+					<button id="matchesToggle" type="button" onclick="handleRecentMatches()">Show recent matches</button>
+					<div id="leagueMatchHistory"></div>
+					<br>
+				</div>
+			</div>
+			
+			
+			<a id="about">About</a>
+			<p>
+			Hello internet citizen,
+			<p>
+			My name is Josh Biol and you are currently perusing/crawling my personal website.
+			</p>
+			<p>
+			"What's on this website?"
+			</p>
+			<p>
+			A collection of my projects. I try to show and express my thoughts, feelings, and beliefs to the world through my projects. Why? Because I can and
+			this is how I choose to express myself.
+			</p>
+			<p>
+			Through my projects, I wish to show you things that I am passionate about like art, fitness, privacy, and fun.
+			</p>
+			<p>
+			Don't forget to be awesome,<br>
+			Josh		
+			</p>
 		</div>
 	</body>
 </html>
