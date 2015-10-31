@@ -10,7 +10,7 @@ function updateRecentMatchesButton() {
 }
 
 function displayRecentMatches() {
-	document.getElementById("leagueMatchHistory").innerHTML = getRecentMatchesHTML();
+	getSummonerMatches();
 }
 
 function hideRecentMatches() {
