@@ -3,13 +3,44 @@ function buildUrl() {
 		'game/by-summoner/' + mySummonerId + '/recent?api_key=' + riotKey
 }
 
+// What do I want?
+// Champion
+// spell 1, spell 2
+// Game mode
+// Game type
+// Stats: Win
+// Stats: kills
+// Stats: deaths
+// Stats: assists
+
 function getGamesData(games, callback) {
 	
-	if (games.length > 0) {
-		games.forEach(function(element) {
-			console.log(element);
-		});
+	var data = new Array();
+
+	for (var i = 0; i < games.length; i++) {
+		var element = games[i];
+		
+		var gameData = {
+			championId: element.championId,
+			createDate: element.createDate,
+			gameMode: element.gameMode,
+			gameType: element.gameType,
+			spell1: element.spell1,
+			spell2: element.spell2,
+			win: element.stats.win,
+			kills: element.stats.championsKilled,
+			deaths: element.stats.numDeaths,
+			assists: element.stats.assists
+		}
+		
+		drawMatchResult(i, gameData.win);
+		
+		data.push(JSON.stringify(gameData, null, 2));
 	}
+	
+	console.log(data.join('\n'))
+
+	return data.join('<br>');	
 }
 
 function getSummonerMatches() {
@@ -23,15 +54,7 @@ function getSummonerMatches() {
 				var json = JSON.parse(xhr.responseText);
 				var matches = JSON.stringify(json, null, 2);
 				
-				console.log(json.hasOwnProperty('games'));
-				
-				
-				getGamesData(json['games']);
-				
-				//console.log(matches);
-				
-				document.getElementById("leagueMatchHistory").innerHTML = 
-					matches;
+				document.getElementById('leagueMatchHistory').innerHTML = getGamesData(json['games']);
 			}
 			else {
 				document.getElementById("leagueMatchHistory").innerHTML = 

@@ -7,15 +7,16 @@
 		<nav id="navigation">
 			<ul id="navigationList">
 				<li><a href="#home">Home </a></li>
+				<li><a href="#videoGames">Video Games </a></li>
 				<li><a href="#writings">Writings </a></li>
 				<li><a href="#health">Health </a></li>
-				<li><a href="#videoGames">Video Games </a></li>
 				<li><a href="#about">About </a></li>
 				<li><a href="#contact">Contact </a></li>
 			</ul>
 		</nav>
 		
 		<script src="js/config.js"></script>
+		<script src="js/canvasHandler.js"></script>
 		<script src="js/riotHandler.js"></script>
 		<script src="js/indexHandler.js"></script>
 		<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
@@ -26,6 +27,19 @@
 			<br>
 			<a id="home">Home</a>
 			<br>
+			
+			<div id="videoGamesDiv">
+				<a id="videoGames">Video Games</a>
+				<div id="leagueDiv">
+					<div id="matchHistCanvasDiv">
+					<canvas id="matchHistCanvas" width="500" height="700"></canvas>
+					</div>
+					<div id="leagueMatchHistory"></div>
+					<script>
+						displayRecentMatches();
+					</script>
+				</div>
+			</div>
 			
 			<div id="#writingsDiv">
 				<a id="writings">Writings</a>
@@ -41,16 +55,6 @@
 				</div>
 				<div id="garminDiv">
 					Garmin content here
-				</div>
-			</div>
-			
-			<div id="videoGamesDiv">
-				<a id="videoGames">Video Games</a>
-				<div id="leagueDiv">
-					<div id="leagueMatchHistory"></div>
-					<script>
-						displayRecentMatches();
-					</script>
 				</div>
 			</div>
 			
