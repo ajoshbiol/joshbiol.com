@@ -3,6 +3,15 @@ function buildUrl() {
 		'game/by-summoner/' + mySummonerId + '/recent?api_key=' + riotKey
 }
 
+function getGamesData(games, callback) {
+	
+	if (games.length > 0) {
+		games.forEach(function(element) {
+			console.log(element);
+		});
+	}
+}
+
 function getSummonerMatches() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -10,8 +19,19 @@ function getSummonerMatches() {
 			// Response received
 			
 			if (xhr.status === 200) {
+				
+				var json = JSON.parse(xhr.responseText);
+				var matches = JSON.stringify(json, null, 2);
+				
+				console.log(json.hasOwnProperty('games'));
+				
+				
+				getGamesData(json['games']);
+				
+				//console.log(matches);
+				
 				document.getElementById("leagueMatchHistory").innerHTML = 
-					xhr.responseText;
+					matches;
 			}
 			else {
 				document.getElementById("leagueMatchHistory").innerHTML = 
@@ -26,5 +46,3 @@ function getSummonerMatches() {
 	xhr.open("GET", buildUrl(), true);
 	xhr.send();
 }
-
-// Request https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/41798816/recent?api_key=0972299d-4f17-4eb0-bfc9-3849b4acb5aa

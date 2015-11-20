@@ -5,91 +5,84 @@
 		<link rel="stylesheet" type="text/css" href="theme.css"/>
 		<title>Josh Biol</title>
 		<nav id="navigation">
+			<ul id="navigationList">
+				<li><a href="#home">Home </a></li>
+				<li><a href="#writings">Writings </a></li>
+				<li><a href="#health">Health </a></li>
+				<li><a href="#videoGames">Video Games </a></li>
+				<li><a href="#about">About </a></li>
+				<li><a href="#contact">Contact </a></li>
+			</ul>
 		</nav>
 		
 		<script src="js/config.js"></script>
 		<script src="js/riotHandler.js"></script>
 		<script src="js/indexHandler.js"></script>
+		<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
 	</head>
+	
 	<body>
-		<div id="left">
-			<ul id="navigationList">
-				<li><a href="#home">Home</a></li>
-				<li><a href="#projects">Projects</a>
-					<ul>
-						<li><a href="#sixWordStoriesDiv">Six Word Stories</a></li>
-						<li><a href="#healthDiv">Health</a></li>
-						<li><a href="#foreverWoodLeagueDiv">Forever Wood League</a></li>
-					</ul>
-				</li>
-				<li><a href="#about">About</a></li>
-			</ul> 
-		
-		</div>
-		<div id="right">
+		<div id="contentDiv">
 			<br>
 			<a id="home">Home</a>
 			<br>
 			
-			
-			<div id="projectsDiv">
-				<a id="projects">Projects</a>
-				<div id="sixWordStoriesDiv">
-					<a id="sixWordStoriesTitle">Six Word Stories</a>
-					<p>
-					Six Word Stories is a project inspired by a friend. The premise of the project is to express a story in six words only. It may just look like a bunch of
-					nonsense to you but to me this project means a lot. I like this project because it serves an outlet for me to express my inner thoughts and feeling out to 
-					the public without people really understanding what I am saying because they have no context. These six word stories are purposely left ambiguous so that
-					you never really understand what I am thinking but it gives me the catharsis that I needed at the time. This project leverages Twitter as the primary medium in which I release my stories.
-					</p>
-					<p>
-					<div id="sixWordStoriesDisplay">
-					In progress...
-					</div>
-					</p>
-				</div>
-				<div id="heathDiv">
-					<a id="healthTitle">Health</a>
-					<p>
-					In progress...
-					</p>
-				</div>
-				<div id="foreverWoodLeagueDiv">
-					<a id="foreverWoodLeagueTitle">Forever Wood League</a>
-					<p>
-					I sometimes play the video game League of Legends for fun. I am no good at it but I enjoy it because of the people. It's a nice social outlet at the end
-					of the day; playing video games with friends and chatting about our day on teamspeak.
-					</p>
-					<p>
-					Parsing in progress...
-					</p>
-					<button id="matchesToggle" type="button" onclick="handleRecentMatches()">Show recent matches</button>
-					<div id="leagueMatchHistory"></div>
-					<br>
+			<div id="#writingsDiv">
+				<a id="writings">Writings</a>
+				<div id="sixWordsDiv">
+					Six words here...
 				</div>
 			</div>
 			
+			<div id="healthDiv">
+				<a id="health">Health</a>
+				<div id="myfitnesspalDiv">
+					My fitness pal content here
+				</div>
+				<div id="garminDiv">
+					Garmin content here
+				</div>
+			</div>
 			
-			<a id="about">About</a>
-			<p>
-			Hello internet citizen,
-			<p>
-			My name is Josh Biol and you are currently perusing/crawling my personal website.
-			</p>
-			<p>
-			"What's on this website?"
-			</p>
-			<p>
-			A collection of my projects. I try to show and express my thoughts, feelings, and beliefs to the world through my projects. Why? Because I can and
-			this is how I choose to express myself.
-			</p>
-			<p>
-			Through my projects, I wish to show you things that I am passionate about like art, fitness, privacy, and fun.
-			</p>
-			<p>
-			Don't forget to be awesome,<br>
-			Josh		
-			</p>
+			<div id="videoGamesDiv">
+				<a id="videoGames">Video Games</a>
+				<div id="leagueDiv">
+					<div id="leagueMatchHistory"></div>
+					<script>
+						displayRecentMatches();
+					</script>
+				</div>
+			</div>
+			
+			<div id="aboutDiv">
+				<a id="about">About</a>
+				<p>
+				Hello internet citizen,
+				<p>
+				My name is Josh Biol and you are currently perusing/crawling my personal website.
+				</p>
+				<p>
+				"What's on this website?"
+				</p>
+				<p>
+				A collection of my projects. I try to show and express my thoughts, feelings, and beliefs to the world through my projects. Why? Because I can and
+				this is how I choose to express myself.
+				</p>
+				<p>
+				Through my projects, I wish to show you things that I am passionate about like art, fitness, privacy, and what I find fun.
+				</p>
+				<p>
+				Don't forget to be awesome,<br>
+				Josh		
+				</p>
+			</div>
+			
+			<div id="contactDiv">
+				<a id="contact">Contact</a>
+				<div id="contactDiv">
+					Contact me here
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

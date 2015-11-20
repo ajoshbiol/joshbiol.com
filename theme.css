@@ -2,54 +2,46 @@ html {
 	height: 100%;
 }
 
-body {
-	height: 100%;
-	margin: 0;
-}
-
 #navigation {
 	color: black;
+	width: 100%;
 }
 
 #navigationList {
 	list-style: none;
+	margin: 0;
+	padding: 0;
+	float: right;	
 }
 
-#left {
-	float: left;
-	width: 33%;
-	background-color: white;
-	height: 100%;
+#navigationList li {
+	display: inline-block;
+	width: 100px;
 }
 
-#right {
+#navigationList li a {
 	color: black;
-	float: left;
-	width: 67%;
+	text-decoration: none;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+#contentDiv {
+	color: black;
 	background-color: white;
 	height: 100%;
+	width: 80%;
+	margin: 0 auto;
 }
 
-#home {
+#contentDiv a {
 	font-size: 200%;
 }
 
-#projects {
-	font-size: 200%;
-}
-
-#sixWordStoriesTitle {
-	font-size: 150%;
-}
-
-#healthTitle {
-	font-size: 150%;
-}
-
-#foreverWoodLeagueTitle {
-	font-size: 150%;
-}
-
-#about {
-	font-size: 200%;
+#leagueMatchHistory {
+	width: 100%;
 }
