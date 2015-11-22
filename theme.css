@@ -1,17 +1,23 @@
 html {
 	height: 100%;
-}
-
-#navigation {
-	color: black;
 	width: 100%;
 }
 
+#navigation {
+	position: relative;
+	color: black;
+	width: 100%;
+	padding-top: 3em;
+	overflow: hidden;
+}
+
 #navigationList {
+	font-family: -moz-fixed;
 	list-style: none;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 	margin: 0;
-	padding: 0;
-	float: right;	
 }
 
 #navigationList li {
@@ -19,27 +25,37 @@ html {
 	width: 100px;
 }
 
-#navigationList li a {
+a.link {
 	color: black;
 	text-decoration: none;
+}
+
+a.link:hover {
+	color: #6699cc;
 }
 
 body {
 	height: 100%;
 	width: 100%;
-	margin: 0;
 }
 
 #contentDiv {
 	color: black;
 	background-color: white;
 	height: 100%;
-	width: 80%;
-	margin: 0 auto;
+	width: 100%;
+	font-family: -moz-fixed;
 }
 
-#contentDiv a {
+h2 {
+	color: #6699cc;
 	font-size: 200%;
+}
+
+div.content {
+	width: 60%;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #leagueDiv {
@@ -47,17 +63,20 @@ body {
 	margin: 0 auto;
 }
 
-#leagueMatchHistory {
-	width: 100%;
-}
-
-#matchHistCanvasDiv {
-	width: 80%;
-	margin: 0 auto;
-}
-
-#matchHistCanvas {
+canvas {
 	border: 1px solid #000000;
-	width: 100%;
-	height: 700px;
+}
+
+#contactContent {
+	padding-bottom: 10em;
+}
+
+#contactLeft {
+	width: 50%;
+	float: left;
+}
+
+#contactRight {
+	width: 50%;
+	float: right;
 }

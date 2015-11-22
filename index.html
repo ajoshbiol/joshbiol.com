@@ -2,89 +2,75 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="theme.css"/>
 		<title>Josh Biol</title>
-		<nav id="navigation">
-			<ul id="navigationList">
-				<li><a href="#home">Home </a></li>
-				<li><a href="#videoGames">Video Games </a></li>
-				<li><a href="#writings">Writings </a></li>
-				<li><a href="#health">Health </a></li>
-				<li><a href="#about">About </a></li>
-				<li><a href="#contact">Contact </a></li>
-			</ul>
-		</nav>
 		
-		<script src="js/config.js"></script>
-		<script src="js/canvasHandler.js"></script>
-		<script src="js/riotHandler.js"></script>
-		<script src="js/indexHandler.js"></script>
-		<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+		<script src="index.js"></script>
 	</head>
 	
 	<body>
+		<nav id="navigation">
+			<ul id="navigationList">
+				<li><a href="#profile" class="link">Profile |</a></li>
+				<li><a href="#health" class="link">Health |</a></li>
+				<li><a href="#fun" class="link">Fun |</a></li>
+				<li><a href="#contact" class="link">Contact</a></li>
+			</ul>
+		</nav>
 		<div id="contentDiv">
-			<br>
-			<a id="home">Home</a>
-			<br>
-			
-			<div id="videoGamesDiv">
-				<a id="videoGames">Video Games</a>
-				<div id="leagueDiv">
-					<div id="matchHistCanvasDiv">
-					<canvas id="matchHistCanvas" width="500" height="700"></canvas>
-					</div>
-					<div id="leagueMatchHistory"></div>
-					<script>
-						displayRecentMatches();
-					</script>
+			<div id="profileDiv">
+				<div id="profileContent" class="content">
+					<a id="profile"></a><br>
+					<h2>Profile</h2>
+					A twenty-something enjoying the little things in life.
+					<hr />
+					<h3>About Me</h3>
 				</div>
 			</div>
-			
-			<div id="#writingsDiv">
-				<a id="writings">Writings</a>
-				<div id="sixWordsDiv">
-					Six words here...
-				</div>
-			</div>
+			<br>
 			
 			<div id="healthDiv">
-				<a id="health">Health</a>
-				<div id="myfitnesspalDiv">
-					My fitness pal content here
-				</div>
-				<div id="garminDiv">
-					Garmin content here
+				<div id="healthConent" class="content">
+					<a id="health"></a><br>
+					<h2>Health</h2>
+					<hr />
+					<h3>Weight</h3>
+					<div id="weightCanvasDiv">
+						<canvas id="healthCanvas" width="600" height="300"></canvas>
+					</div>
 				</div>
 			</div>
 			
-			<div id="aboutDiv">
-				<a id="about">About</a>
-				<p>
-				Hello internet citizen,
-				<p>
-				My name is Josh Biol and you are currently perusing/crawling my personal website.
-				</p>
-				<p>
-				"What's on this website?"
-				</p>
-				<p>
-				A collection of my projects. I try to show and express my thoughts, feelings, and beliefs to the world through my projects. Why? Because I can and
-				this is how I choose to express myself.
-				</p>
-				<p>
-				Through my projects, I wish to show you things that I am passionate about like art, fitness, privacy, and what I find fun.
-				</p>
-				<p>
-				Don't forget to be awesome,<br>
-				Josh		
-				</p>
+			<div id="funDiv">
+				<div id="funContent" class="content">
+					<a id="fun"></a>
+					<h2>Fun</h2>
+					How I like to spend some of my free time.
+					<hr />
+					<h3>League of Legends</h3>
+					Recent Match History<br><br>
+					<div id="leagueDiv">
+						<div id="leagueMatchHistory"></div>
+						<div id="matchHistCanvasDiv">
+							<canvas id="matchHistCanvas" width="600" height="500"></canvas>
+						</div>
+					</div>
+				</div>
 			</div>
 			
 			<div id="contactDiv">
-				<a id="contact">Contact</a>
-				<div id="contactDiv">
-					Contact me here
+				<div id="contactContent" class="content">
+					<a id="contact"></a><br>
+					<h2>Contact</h2>
+					<hr />
+					<br>
+					<div id="contactLeft">
+						<a href="https://www.linkedin.com/in/ajbiol" class="link">https://www.linkedin.com/in/ajbiol</a>
+					</div>
+					<div id="contactRight">
+						<a href="mailto:ajbiol@gmail.com" class="link">ajbiol@gmail.com</a>
+					</div>
 				</div>
 			</div>
 		</div>
