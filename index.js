@@ -23,7 +23,7 @@ function getChampionsData(callback) {
 			}
 		}
 	};
-	xhr.open("GET", 'http://localhost:3000/riot/champions', true);
+	xhr.open("GET", 'http://45.55.153.9:3000/riot/champions', true);
 	xhr.send();
 }
 
@@ -113,7 +113,7 @@ function drawRecentMatches() {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'http://localhost:3000/riot/matchHistory', true);
+	xhr.open("GET", 'http://45.55.153.9:3000/riot/matchHistory', true);
 	xhr.send();
 }
 
