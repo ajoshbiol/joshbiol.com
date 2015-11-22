@@ -58,6 +58,14 @@ div.content {
 	text-align: center;
 }
 
+#diffDays {
+	display: inline;
+}
+
+#currWeight {
+	display: inline;
+}
+
 #leagueDiv {
 	width: 100%;
 	margin: 0 auto;
