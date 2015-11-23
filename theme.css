@@ -1,14 +1,14 @@
 html {
 	height: 100%;
 	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 #navigation {
 	position: relative;
 	color: black;
-	width: 100%;
 	padding-top: 3em;
-	overflow: hidden;
 }
 
 #navigationList {
@@ -52,6 +52,12 @@ h2 {
 	font-size: 200%;
 }
 
+div.container {
+	width: 60%;
+	margin: 0 auto;
+	text-align: center;
+}
+
 div.content {
 	width: 60%;
 	margin: 0 auto;
@@ -66,18 +72,17 @@ div.content {
 	display: inline;
 }
 
-#leagueDiv {
+#canvasDiv {
 	width: 100%;
+	max-height: 300px;
+	display: block;
 	margin: 0 auto;
+	position: relative;
 }
 
 #weightGoogChartsDiv {
-	width: 600px;
+	display: block;
 	margin: 0 auto;
-}
-
-canvas {
-	border: 1px solid #000000;
 }
 
 #contactContent {

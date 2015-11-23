@@ -1,8 +1,12 @@
-var champions = {};
-var availableChampionLogos = [];
+var m_champions = {};
+var m_availableChampionLogos = [];
+var m_leaugeGamesData = {};
+
+
+var m_weightChart = {};
 
 function initAvailableChampionLogos() {
-	availableChampionLogos.push('Nautilus');
+	m_availableChampionLogos.push('Nautilus');
 }
 
 // Fills champions object with data: champion id matched with name
@@ -16,7 +20,7 @@ function getChampionsData(callback) {
 				var json = JSON.parse(xhr.responseText);
 				
 				for(var index in json['data']) {
-					champions[json['data'][index].id] = 
+					m_champions[json['data'][index].id] = 
 						json['data'][index].name;
 				}
 				
@@ -28,16 +32,9 @@ function getChampionsData(callback) {
 	xhr.send();
 }
 
-function drawGameResultCanvas(games) {
-	
-	var wins = 0;
-	var losses = 0;
-	
-	for (var i = 0; i < games.length; i++) {
-		if (games[i].stats.win)
-			wins++;
-		else losses++;
-	}
+function resizeGameResultCanvas() {
+	var wins = m_leaugeGamesData['wins'];
+	var losses = m_leaugeGamesData['losses'];
 	
 	var c = document.getElementById('gameResultsCanvas');
 	var ctx = c.getContext('2d');
@@ -56,6 +53,47 @@ function drawGameResultCanvas(games) {
 		ctx.fillStyle = '#ff3036';
 		ctx.fillRect(0, rectHeight * 3, rectWidthScalar * losses, rectHeight);
 	}
+}
+
+function drawGameResultCanvas(games) {
+	
+	var wins = 0;
+	var losses = 0;
+	
+	for (var i = 0; i < games.length; i++) {
+		if (games[i].stats.win)
+			wins++;
+		else losses++;
+	}
+	
+	var c = document.getElementById('gameResultsCanvas');
+	
+	c.style.width = '100%';
+	c.style.height = '100%';
+	c.style.border = '1px solid #000000';
+	
+	c.width = c.offsetWidth;
+	c.height = c.offsetHeight;
+	
+	var ctx = c.getContext('2d');
+	
+	var rectHeight = c.height / 5;
+	var rectWidthScalar = c.width / 11;
+	
+	// Draw wins
+	if (wins > 0) {
+		ctx.fillStyle = '#2fe68e';
+		ctx.fillRect(0, rectHeight, rectWidthScalar * wins, rectHeight);
+	}
+	
+	// Draw losses
+	if (losses > 0) {
+		ctx.fillStyle = '#ff3036';
+		ctx.fillRect(0, rectHeight * 3, rectWidthScalar * losses, rectHeight);
+	}
+	
+	m_leaugeGamesData['wins'] = wins;
+	m_leaugeGamesData['losses'] = losses;
 }
 
 function drawGameResults() {
@@ -93,9 +131,15 @@ function drawRiotData() {
 		
 		initAvailableChampionLogos();
 		drawGameResults(function() {
+			// TODO
 			// Draw current favorite or most played in recent games
 		});
 	});
+}
+
+function resizeWeightChart() {
+	m_weightChart['chart'].draw(m_weightChart['data'], 
+		m_weightChart['options']);
 }
 
 function getWeightData(callback) {
@@ -158,12 +202,17 @@ function drawWeightChart(weightData) {
 			subtitle: 'In pounds (lbs)'
 		},
 		height: 300,
-		width: 600,
+		width: '100%',
+		margin: '0 auto',
 		legend: { position: 'none'}
 	};
 	
 	var chart = new google.charts.Line(document.getElementById("weightGoogChartsDiv"));
     chart.draw(data, options);
+	
+	m_weightChart['options'] = options;
+	m_weightChart['data'] = data;
+	m_weightChart['chart'] = chart;	
 }
 
 function drawWeightData() {
@@ -175,11 +224,24 @@ function drawWeightData() {
 			data[data.length -1]['weight'];
 			
 		document.getElementById("diffDays").innerHTML = 
-			getDateRange(data);
+			getDateRange(data).toString();
 	});
 }
 
 window.onload = function() {
 	google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
 	drawRiotData();	
+}
+
+if (document.addEventListener) {
+	window.addEventListener('resize', resizeWeightChart);
+	window.addEventListener('resize', resizeGameResultCanvas);
+}
+else if (document.attchEvent) {
+	window.attachEvent('onresize', resizeWeightChart);
+	window.attachEvent('onresize', resizeGameResultCanvas);
+}
+else {
+	window.resize = resizeWeightChart;
+	window.resize = resizeGameResultCanvas;
 }
