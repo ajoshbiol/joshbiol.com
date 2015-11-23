@@ -5,6 +5,7 @@ function initAvailableChampionLogos() {
 	availableChampionLogos.push('Nautilus');
 }
 
+// Fills champions object with data: champion id matched with name
 function getChampionsData(callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -14,9 +15,9 @@ function getChampionsData(callback) {
 				
 				var json = JSON.parse(xhr.responseText);
 				
-				var championString = JSON.stringify(json, null, 2);
 				for(var index in json['data']) {
-					champions[json['data'][index].id] = json['data'][index].name;
+					champions[json['data'][index].id] = 
+						json['data'][index].name;
 				}
 				
 				callback(null);
@@ -27,69 +28,37 @@ function getChampionsData(callback) {
 	xhr.send();
 }
 
-function drawMatchResult(gameNum, win, championId) {
-	var c = document.getElementById('matchHistCanvas');
+function drawGameResultCanvas(games) {
+	
+	var wins = 0;
+	var losses = 0;
+	
+	for (var i = 0; i < games.length; i++) {
+		if (games[i].stats.win)
+			wins++;
+		else losses++;
+	}
+	
+	var c = document.getElementById('gameResultsCanvas');
 	var ctx = c.getContext('2d');
 	
-	ctx.strokeStyle = 'black';
-	ctx.lineWidth = 1;
-
-	if (win)
+	var rectHeight = c.height / 5;
+	var rectWidthScalar = c.width / 11;
+	
+	// Draw wins
+	if (wins > 0) {
 		ctx.fillStyle = '#2fe68e';
-	else ctx.fillStyle = '#ff3036';
+		ctx.fillRect(0, rectHeight, rectWidthScalar * wins, rectHeight);
+	}
 	
-	ctx.fillRect(0, c.height / 10 * gameNum, 10, c.height / 10);
-	ctx.moveTo(0, c.height / 10 * (gameNum + 1) + 0.5);
-	ctx.lineTo(c.width, c.height / 10 * (gameNum + 1) + 0.5);
-	ctx.stroke();
-	
-	if (availableChampionLogos.indexOf(champions[championId]) != -1) {
-		var champLogo = new Image();
-		
-		champLogo.onload = function() {
-			
-			var logoSideLength;
-			if (c.width < c.height)
-				logoSideLength = c.width / 10;
-			else logoSideLength = c.height / 10;
-			
-			ctx.drawImage(champLogo, 11, c.height / 10 * gameNum, logoSideLength, 
-				logoSideLength);
-		};
-		champLogo.src = './src/championLogos/' + champions[championId] + '.png';
+	// Draw losses
+	if (losses > 0) {
+		ctx.fillStyle = '#ff3036';
+		ctx.fillRect(0, rectHeight * 3, rectWidthScalar * losses, rectHeight);
 	}
 }
 
-function drawGamesData(games) {
-	
-	var data = new Array();
-
-	for (var i = 0; i < games.length; i++) {
-		var element = games[i];
-		
-		var gameData = {
-			championId: element.championId,
-			createDate: element.createDate,
-			gameMode: element.gameMode,
-			gameType: element.gameType,
-			spell1: element.spell1,
-			spell2: element.spell2,
-			win: element.stats.win,
-			kills: element.stats.championsKilled,
-			deaths: element.stats.numDeaths,
-			assists: element.stats.assists
-		}
-		
-		drawMatchResult(i, gameData.win, gameData.championId);
-		
-		data.push(JSON.stringify(gameData, null, 2));
-	}
-	
-	return data.join('<br>');	
-}
-
-
-function drawRecentMatches() {
+function drawGameResults() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -99,7 +68,7 @@ function drawRecentMatches() {
 				
 				var json = JSON.parse(xhr.responseText);
 				
-				drawGamesData(json['games'])
+				drawGameResultCanvas(json['games']);
 				
 				document.getElementById('leagueMatchHistory').innerHTML = '';
 			}
@@ -117,6 +86,18 @@ function drawRecentMatches() {
 	xhr.send();
 }
 
+function drawRiotData() {
+	getChampionsData(function(err) {
+		if (err)
+			console.log(err);
+		
+		initAvailableChampionLogos();
+		drawGameResults(function() {
+			// Draw current favorite or most played in recent games
+		});
+	});
+}
+
 function getWeightData(callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -125,7 +106,6 @@ function getWeightData(callback) {
 				
 				var json = JSON.parse(xhr.responseText);
 				
-				console.log(JSON.stringify(json, null, 2));
 				document.getElementById('weightDiv').innerHTML = '';
 				callback(json['data']);
 			}
@@ -139,7 +119,8 @@ function getWeightData(callback) {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'http://45.55.153.9:3000/health/weight/recentWeights', true);
+	xhr.open("GET", 'http://45.55.153.9:3000/health/weight/recentWeights', 
+		true);
 	xhr.send();
 }
 
@@ -188,27 +169,19 @@ function drawWeightDataOnCanvas(data, diffWeight, highestWeight, lowestWeight,
 	var ctx = c.getContext('2d');
 
 	var widthPerDay = c.width / diffDays;
-	console.log('wpd: ' + widthPerDay);
 
 	var heightPerLbs = c.height / diffWeight;
-	console.log('hpl: ' + heightPerLbs);		
 	
 	ctx.strokeStyle = 'black';
 	ctx.lineWidth = 1;
 	
 	for (var i = 0; i < data.length; i++) {
 		var weight = data[i]['weight'];
-		console.log('weight: ' + weight);
 		var date = new Date(data[i]['datetime']);
 		
-		console.log('date: ' + date);
-		console.log('least recent ' + leastRecentDate);
-		console.log('lowest weight ' + lowestWeight);
 		var x = ((date - leastRecentDate) * widthPerDay) / (1000 * 3600 * 24);
 		var y = c.height - ((weight - lowestWeight) * heightPerLbs); //+ 
 			//(.25 * heightPerLbs));
-		
-		console.log('x: ' + x + ' y: ' + y);
 		
 		if (i == 0) {
 			ctx.moveTo(x, y);
@@ -223,18 +196,15 @@ function drawWeightDataOnCanvas(data, diffWeight, highestWeight, lowestWeight,
 function drawWeightData() {
 	getWeightData(function(data) {
 		// Data is an array of weight records
-		console.log('hey');		
 		
 		getWeightRange(data, function(diffWeight, highest, lowest) {
 			
-			console.log(diffWeight);
 			// To add a .25lb buffer on each side
 			diffWeight += .5;
 			
 			getDateRange(data, function(diffDays, mostRecentDate, 
 				leastRecentDate) {
 				
-				console.log(diffDays);
 				document.getElementById("diffDays").innerHTML = diffDays;
 				
 				drawWeightDataOnCanvas(data, diffWeight, highest, lowest,
@@ -246,13 +216,6 @@ function drawWeightData() {
 
 window.onload = function() {
 
-	drawWeightData();
-
-	getChampionsData(function(err) {
-		if (err)
-			console.log(err);
-		
-		initAvailableChampionLogos();
-		drawRecentMatches();
-	});
+	drawWeightData();	
+	drawRiotData();
 }
