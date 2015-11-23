@@ -71,6 +71,11 @@ div.content {
 	margin: 0 auto;
 }
 
+#weightGoogChartsDiv {
+	width: 600px;
+	margin: 0 auto;
+}
+
 canvas {
 	border: 1px solid #000000;
 }

@@ -124,32 +124,7 @@ function getWeightData(callback) {
 	xhr.send();
 }
 
-function getWeightRange(data, callback) {
-	
-	var highest = -1;
-	var lowest = -1;
-	var curr = null;
-	
-	for (var i = 0; i < data.length; i++) {
-		
-		curr = data[i]['weight'];
-		
-		if (highest == -1)
-			highest = curr;
-		if (lowest == -1)
-			lowest = curr;
-		if (curr > highest)
-			highest = curr;
-		if (curr < lowest)
-			lowest = curr;
-	}
-	
-	document.getElementById("currWeight").innerHTML = curr;
-	
-	return callback(highest - lowest, highest, lowest)
-}
-
-function getDateRange(data, callback) {
+function getDateRange(data) {
 	
 	var mostRecent = new Date(data[data.length -1]['datetime']);
 	var leastRecent = new Date(data[0]['datetime']);
@@ -159,63 +134,52 @@ function getDateRange(data, callback) {
 	var timeDiff = Math.abs(mostRecentTime - leastRecentTime);
 	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 	
-	return callback(diffDays, mostRecent, leastRecent)
+	return diffDays
 }
 
-function drawWeightDataOnCanvas(data, diffWeight, highestWeight, lowestWeight,
-	diffDays, mostRecentDate, leastRecentDate) {
+function drawWeightChart(weightData) {
 	
-	var c = document.getElementById('weightCanvas');
-	var ctx = c.getContext('2d');
-
-	var widthPerDay = c.width / diffDays;
-
-	var heightPerLbs = c.height / diffWeight;
+	var temp = [];
 	
-	ctx.strokeStyle = 'black';
-	ctx.lineWidth = 1;
-	
-	for (var i = 0; i < data.length; i++) {
-		var weight = data[i]['weight'];
-		var date = new Date(data[i]['datetime']);
+	for(var i = 0; i < weightData.length; i++) {
+		var date = new Date(weightData[i]['datetime']);
 		
-		var x = ((date - leastRecentDate) * widthPerDay) / (1000 * 3600 * 24);
-		var y = c.height - ((weight - lowestWeight) * heightPerLbs); //+ 
-			//(.25 * heightPerLbs));
-		
-		if (i == 0) {
-			ctx.moveTo(x, y);
-		}
-		else {
-			ctx.lineTo(x, y);
-			ctx.stroke();
-		}
+		temp[i] = [date,weightData[i]['weight']];
 	}
+	
+	var data = new google.visualization.DataTable();
+	data.addColumn('date', 'Date');
+	data.addColumn('number', 'Weight');
+
+	data.addRows(temp);
+	var options = {
+		chart: {
+			title: 'Weight',
+			subtitle: 'In pounds (lbs)'
+		},
+		height: 300,
+		width: 600,
+		legend: { position: 'none'}
+	};
+	
+	var chart = new google.charts.Line(document.getElementById("weightGoogChartsDiv"));
+    chart.draw(data, options);
 }
 
 function drawWeightData() {
 	getWeightData(function(data) {
-		// Data is an array of weight records
+		// Time to try google charts
+		drawWeightChart(data);
 		
-		getWeightRange(data, function(diffWeight, highest, lowest) {
+		document.getElementById("currWeight").innerHTML = 
+			data[data.length -1]['weight'];
 			
-			// To add a .25lb buffer on each side
-			diffWeight += .5;
-			
-			getDateRange(data, function(diffDays, mostRecentDate, 
-				leastRecentDate) {
-				
-				document.getElementById("diffDays").innerHTML = diffDays;
-				
-				drawWeightDataOnCanvas(data, diffWeight, highest, lowest,
-					diffDays, mostRecentDate, leastRecentDate)
-			});
-		});
+		document.getElementById("diffDays").innerHTML = 
+			getDateRange(data);
 	});
 }
 
 window.onload = function() {
-
-	drawWeightData();	
-	drawRiotData();
+	google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
+	drawRiotData();	
 }

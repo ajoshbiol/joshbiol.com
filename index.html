@@ -7,6 +7,8 @@
 		<title>Josh Biol</title>
 		
 		<script src="index.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi">
+		</script>
 	</head>
 	
 	<body>
@@ -22,9 +24,9 @@
 			<div id="profileDiv">
 				<div id="profileContent" class="content">
 					<a id="profile"></a><br>
+					<hr />
 					<h2>Profile</h2>
 					A twenty-something enjoying the little things in life.
-					<hr />
 					<h3>About Me</h3>
 				</div>
 			</div>
@@ -33,28 +35,26 @@
 			<div id="healthDiv">
 				<div id="healthConent" class="content">
 					<a id="health"></a><br>
+					<hr />
 					<h2>Health</h2>
 					"No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable." <br> - Socrates
-					<hr />
 					<h3>Weight</h3>
 					Weight change over <div id="diffDays">undefined</div> 
 					 days. Current weight: <div id="currWeight">undefined</div> lbs.
 					<br><br>
 					<div id="weightDiv"></div>
-					<div id="weightCanvasDiv">
-						<canvas id="weightCanvas" width="600" height="300"></canvas>
-					</div>
+					<div id="weightGoogChartsDiv"></div>
 				</div>
 			</div>
-			
+			<br><br>
 			<div id="funDiv">
 				<div id="funContent" class="content">
 					<a id="fun"></a>
+					<hr />
 					<h2>Fun</h2>
 					"Do anything, but let it produce joy." <br> - Walt Whitman, <i>Leaves of Grass</i>
-					<hr />
 					<h3>League of Legends</h3>
-					Recent Match History<br><br>
+					Recent ten games played results:<br><br>
 					<div id="leagueDiv">
 						
 						<div id="matchHistCanvasDiv">
@@ -70,6 +70,7 @@
 							<br>
 							<div id="leagueMatchHistory"></div>
 							<canvas id="gameResultsCanvas" width="600" height="200"></canvas>
+							<br>Number of games
 						</div>
 					</div>
 				</div>
@@ -78,8 +79,8 @@
 			<div id="contactDiv">
 				<div id="contactContent" class="content">
 					<a id="contact"></a><br>
-					<h2>Contact</h2>
 					<hr />
+					<h2>Contact</h2>
 					<br>
 					<div id="contactLeft">
 						<a href="https://www.linkedin.com/in/ajbiol" class="link">https://www.linkedin.com/in/ajbiol</a>
