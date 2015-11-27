@@ -53,6 +53,8 @@ function resizeGameResultCanvas() {
 		ctx.fillStyle = '#ff3036';
 		ctx.fillRect(0, rectHeight * 3, rectWidthScalar * losses, rectHeight);
 	}
+	
+	c.style.maxHeight = '300px';
 }
 
 function drawGameResultCanvas(games) {
