@@ -42,7 +42,6 @@ body {
 #contentDiv {
 	color: black;
 	background-color: white;
-	height: 100%;
 	width: 100%;
 	font-family: -moz-fixed;
 }
@@ -62,6 +61,8 @@ div.content {
 	width: 60%;
 	margin: 0 auto;
 	text-align: center;
+	padding-top: 5%;
+	padding-bottom: 5%;
 }
 
 #diffDays {
@@ -89,12 +90,11 @@ div.content {
 	padding-bottom: 10em;
 }
 
-#contactLeft {
-	width: 50%;
-	float: left;
-}
-
-#contactRight {
-	width: 50%;
-	float: right;
+#contactColumnsDiv {
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
+	-webkit-column-width: 300px;
+	-moz-column-width: 300px;
+	column-width: 300px;
 }
