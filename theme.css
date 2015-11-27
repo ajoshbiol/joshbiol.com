@@ -49,6 +49,7 @@ body {
 h2 {
 	color: #6699cc;
 	font-size: 200%;
+	margin: 0;
 }
 
 div.container {
@@ -61,8 +62,8 @@ div.content {
 	width: 60%;
 	margin: 0 auto;
 	text-align: center;
-	padding-top: 5%;
-	padding-bottom: 5%;
+	padding-top: 10%;
+	padding-bottom: 10%;
 }
 
 #diffDays {
