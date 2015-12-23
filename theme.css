@@ -75,12 +75,9 @@ div.content {
 	display: inline;
 }
 
-#canvasDiv {
-	width: 100%;
-	max-height: 300px;
+#gameResultsPie {
 	display: block;
 	margin: 0 auto;
-	position: relative;
 }
 
 #weightGoogChartsDiv {

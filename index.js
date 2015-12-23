@@ -1,8 +1,7 @@
 var m_champions = {};
 var m_availableChampionLogos = [];
-var m_leaugeGamesData = {};
 
-
+var m_gamesPieChart = {};
 var m_weightChart = {};
 
 function initAvailableChampionLogos() {
@@ -32,32 +31,12 @@ function getChampionsData(callback) {
 	xhr.send();
 }
 
-function resizeGameResultCanvas() {
-	var wins = m_leaugeGamesData['wins'];
-	var losses = m_leaugeGamesData['losses'];
-	
-	var c = document.getElementById('gameResultsCanvas');
-	var ctx = c.getContext('2d');
-	
-	var rectHeight = c.height / 5;
-	var rectWidthScalar = c.width / 11;
-	
-	// Draw wins
-	if (wins > 0) {
-		ctx.fillStyle = '#2fe68e';
-		ctx.fillRect(0, rectHeight, rectWidthScalar * wins, rectHeight);
-	}
-	
-	// Draw losses
-	if (losses > 0) {
-		ctx.fillStyle = '#ff3036';
-		ctx.fillRect(0, rectHeight * 3, rectWidthScalar * losses, rectHeight);
-	}
-	
-	c.style.maxHeight = '300px';
+function redrawGamesPieChart() {
+	m_gamesPieChart['chart'].draw(m_gamesPieChart['data'], 
+		m_gamesPieChart['options']);
 }
 
-function drawGameResultCanvas(games) {
+function drawGamesPieChart(games) {
 	
 	var wins = 0;
 	var losses = 0;
@@ -68,34 +47,27 @@ function drawGameResultCanvas(games) {
 		else losses++;
 	}
 	
-	var c = document.getElementById('gameResultsCanvas');
+	var data = google.visualization.arrayToDataTable([
+          ['Result', 'Count'],
+          ['Wins', wins],
+          ['Losses', losses]
+        ]);
+	var options = {
+		legend: { position: 'bottom', alignment: 'center'},
+		pieHole: 0.4,
+		height: '100%',
+  		width: '100%',
+		margin: '0 auto',
+		chartArea: { width:"100%",height:"70%"}
+    };
 	
-	c.style.width = '100%';
-	c.style.height = '100%';
-	c.style.border = '1px solid #000000';
+	var chart = new google.visualization.PieChart(document.getElementById('gameResultsPie'));
+
+	chart.draw(data, options);
 	
-	c.width = c.offsetWidth;
-	c.height = c.offsetHeight;
-	
-	var ctx = c.getContext('2d');
-	
-	var rectHeight = c.height / 5;
-	var rectWidthScalar = c.width / 11;
-	
-	// Draw wins
-	if (wins > 0) {
-		ctx.fillStyle = '#2fe68e';
-		ctx.fillRect(0, rectHeight, rectWidthScalar * wins, rectHeight);
-	}
-	
-	// Draw losses
-	if (losses > 0) {
-		ctx.fillStyle = '#ff3036';
-		ctx.fillRect(0, rectHeight * 3, rectWidthScalar * losses, rectHeight);
-	}
-	
-	m_leaugeGamesData['wins'] = wins;
-	m_leaugeGamesData['losses'] = losses;
+	m_gamesPieChart['options'] = options;
+	m_gamesPieChart['data'] = data;
+	m_gamesPieChart['chart'] = chart;	
 }
 
 function drawGameResults() {
@@ -108,7 +80,8 @@ function drawGameResults() {
 				
 				var json = JSON.parse(xhr.responseText);
 				
-				drawGameResultCanvas(json['games']);
+				//drawGameResultCanvas(json['games']);
+				drawGamesPieChart(json['games']);
 				
 				document.getElementById('leagueMatchHistory').innerHTML = '';
 			}
@@ -232,18 +205,18 @@ function drawWeightData() {
 
 window.onload = function() {
 	google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
-	drawRiotData();	
+	google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
 }
 
 if (document.addEventListener) {
 	window.addEventListener('resize', resizeWeightChart);
-	window.addEventListener('resize', resizeGameResultCanvas);
+	window.addEventListener('resize', redrawGamesPieChart);
 }
 else if (document.attchEvent) {
 	window.attachEvent('onresize', resizeWeightChart);
-	window.attachEvent('onresize', resizeGameResultCanvas);
+	window.attachEvent('onresize', redrawGamesPieChart);
 }
 else {
 	window.resize = resizeWeightChart;
-	window.resize = resizeGameResultCanvas;
+	window.resize = redrawGamesPieChart;
 }
