@@ -5,25 +5,51 @@ html {
 	padding: 0;
 }
 
-#navigation {
-	position: relative;
-	color: black;
-	padding-top: 3em;
+/* Body start */
+body {
+	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+    font-family: -moz-fixed;
 }
 
-#navigationList {
-	font-family: -moz-fixed;
-	list-style: none;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	margin: 0;
+hr {
+    margin: 0px;
+    padding: 0px;
+    border-color: #000000;
 }
 
-#navigationList li {
-	display: inline-block;
-	width: 100px;
+/* Custom nav bar start */
+.navbar-custom {
+    background-color:#ffffff;
+    border-radius:0;
+    margin-bottom: 0px;
 }
+
+.navbar-custom .navbar-toggle {
+    border-color: #000000;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #000000;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#000000;
+    text-decoration: none;
+}
+
+.navbar-custom .navbar-nav > li > a:hover {
+    color:#6699cc;
+    background-color: #ffffff;
+}
+
+.navbar-custom .navbar-brand {
+    color:#6699cc;
+    font-size: 210%;
+}
+
+/* Custom nav bar end */
 
 a.link {
 	color: black;
@@ -34,39 +60,25 @@ a.link:hover {
 	color: #6699cc;
 }
 
-body {
-	height: 100%;
-	width: 100%;
-	overflow-x: hidden;
-}
-
-#contentDiv {
-	color: black;
-	background-color: white;
-	width: 100%;
-	font-family: -moz-fixed;
-}
-
 h2 {
 	color: #6699cc;
-	font-size: 200%;
 	margin: 0;
 }
 
-div.container {
+.container-custom {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.content {
 	width: 60%;
 	margin: 0 auto;
 	text-align: center;
+	padding-top: 8%;
+	padding-bottom: 8%;
 }
 
-div.content {
-	width: 60%;
-	margin: 0 auto;
-	text-align: center;
-	padding-top: 10%;
-	padding-bottom: 10%;
-}
-
+/* Weight content start */
 #diffDays {
 	display: inline;
 }
@@ -75,16 +87,22 @@ div.content {
 	display: inline;
 }
 
-#gameResultsPie {
-	display: block;
-	margin: 0 auto;
-}
-
 #weightGoogChartsDiv {
 	display: block;
 	margin: 0 auto;
 }
 
+/* Weight content end */
+
+/* LoL content start */
+#gameResultsPie {
+	display: block;
+	margin: 0 auto;
+}
+
+/* LoL content end */
+
+/* Contant content start */
 #contactContent {
 	padding-bottom: 10em;
 }
@@ -97,3 +115,4 @@ div.content {
 	-moz-column-width: 300px;
 	column-width: 300px;
 }
+/* Contact content end */
