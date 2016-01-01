@@ -2,3 +2,4 @@
 node/configs.js
 node/node_modules/
 node/package.json
+deployment/*
