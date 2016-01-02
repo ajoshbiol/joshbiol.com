@@ -204,10 +204,6 @@ function loadHome() {
 					'Status Code": ' + xhr.status;
 			}
 		}
-		else {
-			document.getElementById("contentDiv").innerHTML = 
-				'Loading... Please wait...';
-		}
 	};
 	xhr.open("GET", 'home.html', 
 		true);
@@ -228,7 +224,6 @@ function loadLogin() {
 		if (xhr.readyState === XMLHttpRequest.DONE) {
 			if (xhr.status === 200) {
 				
-				console.log('test');
 				document.getElementById('contentDiv').innerHTML = xhr.responseText;
                 
                 bShowingLogin = true;
@@ -238,10 +233,6 @@ function loadLogin() {
 				document.getElementById("contentDiv").innerHTML = 
 					'Status Code": ' + xhr.status;
 			}
-		}
-		else {
-			document.getElementById("contentDiv").innerHTML = 
-				'Loading... Please wait...';
 		}
 	};
 	xhr.open("GET", 'login.html', 
@@ -259,7 +250,6 @@ window.onload = function() {
     
     loginLink.onclick = function() {
         if (!bShowingLogin) {
-            console.log('login clicked');
             loadLogin();    
         }
         
