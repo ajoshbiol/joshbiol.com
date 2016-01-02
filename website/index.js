@@ -1,35 +1,6 @@
-var m_champions = {};
-var m_availableChampionLogos = [];
+/* Start Riot section */
 
 var m_gamesPieChart = {};
-var m_weightChart = {};
-
-function initAvailableChampionLogos() {
-	m_availableChampionLogos.push('Nautilus');
-}
-
-// Fills champions object with data: champion id matched with name
-function getChampionsData(callback) {
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			// Response received
-			if (xhr.status === 200) {
-				
-				var json = JSON.parse(xhr.responseText);
-				
-				for(var index in json['data']) {
-					m_champions[json['data'][index].id] = 
-						json['data'][index].name;
-				}
-				
-				callback(null);
-			}
-		}
-	};
-	xhr.open("GET", 'http://45.55.153.9:3000/riot/champions', true);
-	xhr.send();
-}
 
 function redrawGamesPieChart() {
 	m_gamesPieChart['chart'].draw(m_gamesPieChart['data'], 
@@ -80,7 +51,6 @@ function drawGameResults() {
 				
 				var json = JSON.parse(xhr.responseText);
 				
-				//drawGameResultCanvas(json['games']);
 				drawGamesPieChart(json['games']);
 				
 				document.getElementById('leagueMatchHistory').innerHTML = '';
@@ -100,17 +70,14 @@ function drawGameResults() {
 }
 
 function drawRiotData() {
-	getChampionsData(function(err) {
-		if (err)
-			console.log(err);
-		
-		initAvailableChampionLogos();
-		drawGameResults(function() {
-			// TODO
-			// Draw current favorite or most played in recent games
-		});
-	});
+    drawGameResults();
 }
+
+/* End Riot section */
+
+/* Start Weight section */
+
+var m_weightChart = {};
 
 function resizeWeightChart() {
 	m_weightChart['chart'].draw(m_weightChart['data'], 
@@ -203,9 +170,114 @@ function drawWeightData() {
 	});
 }
 
-window.onload = function() {
-	google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
+/* End Weight section */
+
+
+/* Start Home section */
+
+var bShowingHome = false;
+
+function showHome() {
+    if (!bShowingHome) {
+        loadHome();
+    }
+}
+
+function loadHomeGraphs() {
+    google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
 	google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
+}
+
+function loadHome() {
+    var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			if (xhr.status === 200) {
+				
+                loadHomeGraphs();
+				document.getElementById('contentDiv').innerHTML = xhr.responseText;
+                bShowingLogin = false;
+                bShowingHome = true; 
+			}
+			else {
+				document.getElementById("contentDiv").innerHTML = 
+					'Status Code": ' + xhr.status;
+			}
+		}
+		else {
+			document.getElementById("contentDiv").innerHTML = 
+				'Loading... Please wait...';
+		}
+	};
+	xhr.open("GET", 'home.html', 
+		true);
+    xhr.setRequestHeader('Content-type', 'text/html');
+	xhr.send();
+}
+  
+
+/* End Home section */
+
+/* Start Login section */
+
+var bShowingLogin = false;
+
+function loadLogin() {
+    var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			if (xhr.status === 200) {
+				
+				console.log('test');
+				document.getElementById('contentDiv').innerHTML = xhr.responseText;
+                
+                bShowingLogin = true;
+                bShowingHome = false; 
+			}
+			else {
+				document.getElementById("contentDiv").innerHTML = 
+					'Status Code": ' + xhr.status;
+			}
+		}
+		else {
+			document.getElementById("contentDiv").innerHTML = 
+				'Loading... Please wait...';
+		}
+	};
+	xhr.open("GET", 'login.html', 
+		true);
+    xhr.setRequestHeader('Content-type', 'text/html');
+	xhr.send();
+}
+
+/* End Login section */
+
+window.onload = function() {
+	loadHome();
+    
+    var loginLink = document.getElementById("loginLink");
+    
+    loginLink.onclick = function() {
+        if (!bShowingLogin) {
+            console.log('login clicked');
+            loadLogin();    
+        }
+        
+        return false;
+    }
+    
+    var brandLink = document.getElementById("brandLink");
+    brandLink.onclick = showHome;
+    
+    var profileLink = document.getElementById("profileLink");
+    var healthLink = document.getElementById("healthLink");
+    var funLink = document.getElementById("funLink");
+    var contactLink = document.getElementById("contactLink");
+    
+    profileLink.onclick = showHome;
+    healthLink.onclick = showHome;
+    funLink.onclick = showHome;
+    contactLink.onclick = showHome;
 }
 
 if (document.addEventListener) {
