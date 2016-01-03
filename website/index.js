@@ -57,7 +57,7 @@ function drawGameResults() {
 			}
 			else {
 				document.getElementById("leagueMatchHistory").innerHTML = 
-					'Status Code": ' + xhr.status;
+					'Status Code: ' + xhr.status;
 			}
 		}
 		else {
@@ -65,7 +65,7 @@ function drawGameResults() {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'http://45.55.153.9:3000/riot/matchHistory', true);
+	xhr.open("GET", 'https://joshbiol.com:3000/riot/matchHistory', true);
 	xhr.send();
 }
 
@@ -97,7 +97,7 @@ function getWeightData(callback) {
 			}
 			else {
 				document.getElementById("weightDiv").innerHTML = 
-					'Status Code": ' + xhr.status;
+					'Status Code: ' + xhr.status;
 			}
 		}
 		else {
@@ -105,7 +105,7 @@ function getWeightData(callback) {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'http://45.55.153.9:3000/health/weight/recentWeights', 
+	xhr.open("GET", 'https://joshbiol.com:3000/health/weight/recentWeights', 
 		true);
 	xhr.send();
 }
@@ -201,7 +201,7 @@ function loadHome() {
 			}
 			else {
 				document.getElementById("contentDiv").innerHTML = 
-					'Status Code": ' + xhr.status;
+					'Status Code: ' + xhr.status;
 			}
 		}
 	};
@@ -231,7 +231,7 @@ function loadLogin() {
 			}
 			else {
 				document.getElementById("contentDiv").innerHTML = 
-					'Status Code": ' + xhr.status;
+					'Status Code: ' + xhr.status;
 			}
 		}
 	};
