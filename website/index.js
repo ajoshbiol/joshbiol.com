@@ -120,7 +120,7 @@ function getDateRange(data) {
 	var timeDiff = Math.abs(mostRecentTime - leastRecentTime);
 	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 	
-	return diffDays
+	return diffDays;
 }
 
 function drawWeightChart(weightData) {
@@ -175,14 +175,6 @@ function drawWeightData() {
 
 /* Start Home section */
 
-var bShowingHome = false;
-
-function showHome() {
-    if (!bShowingHome) {
-        loadHome();
-    }
-}
-
 function loadHomeGraphs() {
     google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
 	google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
@@ -194,10 +186,11 @@ function loadHome() {
 		if (xhr.readyState === XMLHttpRequest.DONE) {
 			if (xhr.status === 200) {
 				
+				document.body.innerHTML = xhr.responseText;
                 loadHomeGraphs();
-				document.getElementById('contentDiv').innerHTML = xhr.responseText;
-                bShowingLogin = false;
-                bShowingHome = true; 
+                
+                var loginLink = document.getElementById("loginLink");
+                loginLink.onclick = loadLogin;
 			}
 			else {
 				document.getElementById("contentDiv").innerHTML = 
@@ -205,7 +198,7 @@ function loadHome() {
 			}
 		}
 	};
-	xhr.open("GET", 'home.html', 
+	xhr.open("GET", 'home.html',
 		true);
     xhr.setRequestHeader('Content-type', 'text/html');
 	xhr.send();
@@ -216,18 +209,16 @@ function loadHome() {
 
 /* Start Login section */
 
-var bShowingLogin = false;
 
 function loadLogin() {
     var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === XMLHttpRequest.DONE) {
 			if (xhr.status === 200) {
-				
-				document.getElementById('contentDiv').innerHTML = xhr.responseText;
+				document.body.innerHTML = xhr.responseText;
                 
-                bShowingLogin = true;
-                bShowingHome = false; 
+                var homeLink = document.getElementById("homeLink");
+                homeLink.onclick = loadHome;
 			}
 			else {
 				document.getElementById("contentDiv").innerHTML = 
@@ -245,29 +236,6 @@ function loadLogin() {
 
 window.onload = function() {
 	loadHome();
-    
-    var loginLink = document.getElementById("loginLink");
-    
-    loginLink.onclick = function() {
-        if (!bShowingLogin) {
-            loadLogin();    
-        }
-        
-        return false;
-    }
-    
-    var brandLink = document.getElementById("brandLink");
-    brandLink.onclick = showHome;
-    
-    var profileLink = document.getElementById("profileLink");
-    var healthLink = document.getElementById("healthLink");
-    var funLink = document.getElementById("funLink");
-    var contactLink = document.getElementById("contactLink");
-    
-    profileLink.onclick = showHome;
-    healthLink.onclick = showHome;
-    funLink.onclick = showHome;
-    contactLink.onclick = showHome;
 }
 
 if (document.addEventListener) {
