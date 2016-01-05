@@ -9,8 +9,8 @@ var options = {
     cert : fs.readFileSync(configs.sslCert.cert)
 };
 
-var riotHandler = require('./handlers/riotHandler.js');
-var weightHandler = require('./handlers/weightHandler.js');
+var riotHandler = require('./models/riotHandler.js');
+var weightHandler = require('./models/weightHandler.js');
 
 var app = express();
 
