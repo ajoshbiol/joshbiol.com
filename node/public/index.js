@@ -198,7 +198,7 @@ function loadHome() {
 			}
 		}
 	};
-	xhr.open("GET", 'home.html',
+	xhr.open("GET", 'https://joshbiol.com:3000/home.html',
 		true);
     xhr.setRequestHeader('Content-type', 'text/html');
 	xhr.send();
@@ -226,7 +226,7 @@ function loadLogin() {
 			}
 		}
 	};
-	xhr.open("GET", 'login.html', 
+	xhr.open("GET", 'https://joshbiol.com:3000/login.html', 
 		true);
     xhr.setRequestHeader('Content-type', 'text/html');
 	xhr.send();

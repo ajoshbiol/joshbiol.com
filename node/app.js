@@ -16,9 +16,17 @@ var app = express();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  if ('OPTIONS' == req.method) {
+        res.sendStatus(200);
+    } else {
+        next();
+    };
 });
+
+app.use(express.static('public'));
+app.use(express.static('public/favicon'));
 
 // Get match history
 app.get('/riot/matchHistory', function(req, res) {
