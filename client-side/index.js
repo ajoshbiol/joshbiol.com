@@ -175,68 +175,10 @@ function drawWeightData() {
 
 /* Start Home section */
 
-function loadHomeGraphs() {
-    google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
-	google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
-}
-
-function loadHome() {
-    var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			if (xhr.status === 200) {
-				
-				document.body.innerHTML = xhr.responseText;
-                loadHomeGraphs();
-                
-                var loginLink = document.getElementById("loginLink");
-                loginLink.onclick = loadLogin;
-			}
-			else {
-				document.getElementById("contentDiv").innerHTML = 
-					'Status Code: ' + xhr.status;
-			}
-		}
-	};
-	xhr.open("GET", 'https://joshbiol.com:3000/home.html',
-		true);
-    xhr.setRequestHeader('Content-type', 'text/html');
-	xhr.send();
-}
-  
-
-/* End Home section */
-
-/* Start Login section */
-
-
-function loadLogin() {
-    var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			if (xhr.status === 200) {
-				document.body.innerHTML = xhr.responseText;
-                
-                var homeLink = document.getElementById("homeLink");
-                homeLink.onclick = loadHome;
-			}
-			else {
-				document.getElementById("contentDiv").innerHTML = 
-					'Status Code: ' + xhr.status;
-			}
-		}
-	};
-	xhr.open("GET", 'https://joshbiol.com:3000/login.html', 
-		true);
-    xhr.setRequestHeader('Content-type', 'text/html');
-	xhr.send();
-}
-
-/* End Login section */
-
 window.onload = function() {
-	loadHome();
-}
+    google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
+    google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
+};
 
 if (document.addEventListener) {
 	window.addEventListener('resize', resizeWeightChart);
