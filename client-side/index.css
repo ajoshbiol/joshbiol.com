@@ -115,3 +115,17 @@ h2 {
 	column-width: 300px;
 }
 /* Contact content end */
+
+/* Login content start */
+
+#loginForm {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.form-group {
+    padding: 0;
+    margin: 0 auto;
+}
+
+/* Login content end */

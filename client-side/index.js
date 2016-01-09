@@ -173,8 +173,6 @@ function drawWeightData() {
 /* End Weight section */
 
 
-/* Start Home section */
-
 window.onload = function() {
     google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
     google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
