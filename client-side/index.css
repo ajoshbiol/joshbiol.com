@@ -11,6 +11,7 @@ body {
     height: 100%;
 	overflow-x: hidden;
     font-family: -moz-fixed;
+    background-color: #9ab1cb;
 }
 
 hr {
@@ -24,6 +25,9 @@ hr {
     background-color:#ffffff;
     border-radius:0;
     margin-bottom: 0px;
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 2px 2px 1px #686868;
 }
 
 .navbar-custom .navbar-toggle {
@@ -67,13 +71,15 @@ h2 {
 .container-custom {
     width: 70%;
     margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 1px #686868;
 }
 
 .content {
 	width: 60%;
 	margin: 0 auto;
 	text-align: center;
-	padding-top: 8%;
+	padding-top: 6%;
 	padding-bottom: 8%;
 }
 
@@ -102,18 +108,26 @@ h2 {
 /* LoL content end */
 
 /* Contant content start */
-#contactContent {
-	padding-bottom: 10em;
+#linkedinInfoDiv {
+    display: block;
+    float: left;
+    width: 50%;
 }
 
-#contactColumnsDiv {
-	-webkit-column-count: 2;
-	-moz-column-count: 2;
-	column-count: 2;
-	-webkit-column-width: 300px;
-	-moz-column-width: 300px;
-	column-width: 300px;
+#emailInfoDiv {
+    display: block;
+    float: left;
+    width: 50%;
 }
+
+@media screen and (max-width: 400px) {
+   #linkedinInfoDiv { 
+    float: none;
+    width: 50%;
+    overflow: hidden;
+  }
+}
+
 /* Contact content end */
 
 /* Login content start */
