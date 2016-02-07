@@ -65,7 +65,7 @@ function drawGameResults() {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'https://joshbiol.com:3000/riot/matchHistory', true);
+	xhr.open("GET", 'https://joshbiol.com/api/preview/matchHistory', true);
 	xhr.send();
 }
 
@@ -105,7 +105,7 @@ function getWeightData(callback) {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'https://joshbiol.com:3000/health/weight/recentWeights', 
+	xhr.open("GET", 'https://joshbiol.com/api/preview/recentWeights', 
 		true);
 	xhr.send();
 }

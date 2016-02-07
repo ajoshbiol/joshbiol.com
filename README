@@ -1,2 +1,4 @@
 Attempting to create a simple portfolio web page to help facilitate my
 learning of web development technologies.
+
+nohup nodejs app.js prod > out.log 2> err.log < /dev/null &

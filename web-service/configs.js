@@ -12,6 +12,7 @@ var jarvisConn = {
 };
 
 var devConfigs = {
+    type : 'dev',
     matchHistoryUrl : lolMatchHistoryUrl,
     mysqlConn : jarvisConn,
     sslCert : {
@@ -25,6 +26,7 @@ var devConfigs = {
 }
 
 var qaConfigs = {
+    type : 'qa',
     matchHistoryUrl : lolMatchHistoryUrl,
     mysqlConn : jarvisConn,
     sslCert : {
@@ -38,6 +40,7 @@ var qaConfigs = {
 }
 
 var prodConfigs = {
+    type : 'prod',
     matchHistoryUrl : lolMatchHistoryUrl,
     mysqlConn : jarvisConn,
     sslCert : {

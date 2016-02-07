@@ -1,5 +1,6 @@
 var express = require('express');
 var https = require('https');
+var http = require('http');
 var fs = require('fs');
 
 // Init configs
@@ -10,16 +11,22 @@ var configs = require('./configs.js').getConfigs();
 if (configs == undefined)
     process.exit();
 
-var options = {
-    key : fs.readFileSync(configs.sslCert.key),
-    cert : fs.readFileSync(configs.sslCert.cert)
-};
+var options = {};
+
+if (configs.type != 'dev') {
+    options = {
+        key : fs.readFileSync(configs.sslCert.key),
+        cert : fs.readFileSync(configs.sslCert.cert)
+    };
+}
 
 var riotHandler = require('./models/riotHandler.js');
 var weightHandler = require('./models/weights.js');
 var users = require('./models/weights.js');
 
 var app = express();
+
+app.use(express.static(__dirname + '/views'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://joshbiol.com");
@@ -32,7 +39,6 @@ app.use(function(req, res, next) {
     };
 });
 
-
 // Authenticate
 app.post('/api/authenticate', function(req, res) {
     console.log('authenticate received');
@@ -44,7 +50,7 @@ app.post('/api/authenticate', function(req, res) {
 });
 
 // Get match history
-app.get('/riot/matchHistory', function(req, res) {
+app.get('/api/preview/matchHistory', function(req, res) {
 	console.log('match history request received');
 	riotHandler.getMatchHistory(function(err, data) {
 		if (err) {
@@ -60,7 +66,7 @@ app.get('/riot/matchHistory', function(req, res) {
 });
 
 // Get recent weights
-app.get('/health/weight/recentWeights', function(req, res) {
+app.get('/api/preview/recentWeights', function(req, res) {
 	console.log('get recent weights request received');
 	
 	weightHandler.getRecentWeights(function(err, data) {
@@ -75,6 +81,13 @@ app.get('/health/weight/recentWeights', function(req, res) {
 	});
 });
 
-https.createServer(options, app).listen(3000, function() {
-    console.log('Started');
-});
+if (configs.type != 'dev') {
+    https.createServer(options, app).listen(3000, function() {
+        console.log('Started https server.');
+    });
+}
+else {
+    http.createServer(app).listen(3000, function() {
+        console.log('Started http server.');
+    });
+}
