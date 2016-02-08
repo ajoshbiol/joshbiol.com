@@ -19,7 +19,7 @@ function validateCredentials(email, password) {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("POST", 'https://joshbiol.com:3000/api/authenticate', true);
+	xhr.open("POST", 'https://joshbiol.com/api/authenticate', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send('email=' + email + '&password=' + password);
 }

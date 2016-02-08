@@ -1,6 +1,7 @@
 var express = require('express');
 var https = require('https');
 var http = require('http');
+var bodyParser = require('body-parser');
 var fs = require('fs');
 
 // Init configs
@@ -22,7 +23,7 @@ if (configs.type != 'dev') {
 
 var riotHandler = require('./models/riotHandler.js');
 var weightHandler = require('./models/weights.js');
-var users = require('./models/weights.js');
+var users = require('./models/users.js');
 
 var app = express();
 
@@ -39,14 +40,30 @@ app.use(function(req, res, next) {
     };
 });
 
+app.use(bodyParser.urlencoded({ extended : true}));
+
 // Authenticate
 app.post('/api/authenticate', function(req, res) {
     console.log('authenticate received');
-    console.log(req.body);
+    console.log(JSON.stringify(req.body, null, 2));
     
-    //users.isValidUser();
-    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});	
-	return res.end('{ "test" : "msg" }');
+    if (req.body.email == undefined || req.body.password == undefined) {
+        res.writeHead(401);
+        return res.end('Error');
+    }
+    
+    users.isValidUser(req.body.email, req.body.password, function(err, token) {
+        
+        if (err) {
+            res.writeHead(401);
+            return res.end('Error');
+        }
+        else {
+            res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});	
+    	   return res.end('{ "authorized" : 1, "token" : "' + token + '" }');
+        }    
+    });
+    
 });
 
 // Get match history
