@@ -40,8 +40,8 @@ app.use(function(req, res, next) {
     };
 });
 
-app.use(bodyParser.urlencoded({ extended : true}));
-
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 // Authenticate
 app.post('/api/authenticate', function(req, res) {
     console.log('authenticate received');
@@ -59,7 +59,7 @@ app.post('/api/authenticate', function(req, res) {
             return res.end('Error');
         }
         else {
-            res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});	
+           res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});	
     	   return res.end('{ "authorized" : 1, "token" : "' + token + '" }');
         }    
     });
