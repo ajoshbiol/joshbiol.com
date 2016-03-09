@@ -40,23 +40,25 @@ app.use(function(req, res, next) {
     };
 });
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.text());
+
 // Authenticate
 app.post('/api/authenticate', function(req, res) {
     console.log('authenticate received');
     console.log(JSON.stringify(req.body, null, 2));
+
+    var body = JSON.parse(req.body);
     
-    if (req.body.email == undefined || req.body.password == undefined) {
+    if (body.email == undefined || body.password == undefined) {
         res.writeHead(401);
         return res.end('Error');
     }
     
-    users.isValidUser(req.body.email, req.body.password, function(err, token) {
+    users.isValidUser(body.email, body.password, function(err, token) {
         
         if (err) {
             res.writeHead(401);
-            return res.end('Error');
+            return res.end('Error from is valid user: ' + err.message);
         }
         else {
            res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});	
@@ -72,7 +74,7 @@ app.get('/api/preview/matchHistory', function(req, res) {
 	riotHandler.getMatchHistory(function(err, data) {
 		if (err) {
 			res.writeHead(400);
-			return res.end(err);
+			return res.end(err.message);
 		}	
 		
 		console.log('sending match history!');
@@ -89,7 +91,7 @@ app.get('/api/preview/recentWeights', function(req, res) {
 	weightHandler.getRecentWeights(function(err, data) {
 		if (err) {
 			res.writeHead(400);
-			return res.end(err);			
+			return res.end(err.message);			
 		}
 		
 		console.log('returning weight data!');

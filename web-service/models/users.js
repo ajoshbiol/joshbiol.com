@@ -9,6 +9,9 @@ module.exports = {
             // To avoid sql injection
             username = mysql.escape(username);
             password = mysql.escape(password);
+
+            console.log('username: ' + username);
+            console.log('password: ' + password);
             
             var connection = mysql.createConnection(configs.mysqlConn);
             var query = 'CALL sp_is_valid_user (' + username + ', ' + password + 
@@ -35,6 +38,7 @@ module.exports = {
             });
         }
         catch (err) {
+            console.error(err.message);
             callback(err);
         }
     }
