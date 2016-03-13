@@ -2,7 +2,3 @@ Attempting to create a simple portfolio web page to help facilitate my
 learning of web development technologies.
 
 nohup nodejs app.js prod > out.log 2> err.log < /dev/null &
-
-Digital Ocean droplets
-mysql-db root@45.55.55.13
-portfolio-prod josh@45.55.153.9
