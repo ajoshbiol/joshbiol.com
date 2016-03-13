@@ -1,3 +1,0 @@
-To run:
-
-nohup nodejs monitor.js > out.log 2> err.log < /dev/null &
