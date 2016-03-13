@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./index.css"/>
+        
+        <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16"/>
+        <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32"/>
+        <title>Josh Biol</title>
+		
+        <script src="./index.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi">
+		</script>
+	</head>
+	<body>
+        <br/>
+        <nav class="navbar navbar-custom">
+            <div class="navbar-header">
+                <a id="brandLink" class="navbar-brand" href="#">joshbiol.com</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a id="profileLink" href="#profile" class="link">Profile</a></li>
+                    <li><a id="healthLink" href="#health" class="link">Health</a></li>
+                    <li><a id="funLink" href="#fun" class="link">Fun</a></li>
+                    <li><a id="contactLink" href="#contact" class="link">Contact</a></li>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./login.html" class="link">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <br/>
+        <div>
+            <div id="profileDiv" class="container-custom">
+                <div id="profileContent" class="content">
+                    <a id="profile"></a>
+                    <h2>Profile</h2>
+                    <br/>
+                    A twenty-something enjoying the little things in life.
+                    <br/><br/>
+                    <hr />
+                    <h4>About Me</h4>
+                </div>
+            </div>
+            <br/>
+            <div id="healthDiv" class="container-custom">
+                <div id="healthConent" class="content">
+                    <a id="health"></a>
+                    <h2>Health</h2>
+                    <br/>
+                    "No man has the right to be an amateur in the matter of physical 
+                    training. It is a shame for a man to grow old without seeing the 
+                    beauty and strength of which his body is capable." <br/> - Socrates
+                    <br/><br/><hr/>
+                    <h4>Weight</h4>
+                    <br/>
+                    Weight change over <div id="diffDays">undefined</div> 
+                        days. Current weight: <div id="currWeight">undefined</div> lbs.
+                    <br/><br/>
+                    <div id="weightDiv"></div>
+                    <div id="weightGoogChartsDiv"></div>
+                </div>
+            </div>
+            <br/>
+            <div id="funDiv" class="container-custom">
+                <div id="funContent" class="content">
+                    <a id="fun"></a>
+                    <h2>Fun</h2>
+                    <br/>
+                    "Do anything, but let it produce joy." <br/> - Walt Whitman, 
+                        <i>Leaves of Grass</i>
+                    <br/><br/>
+                    <hr />
+                    <h4>League of Legends</h4><br/>
+                    Recent ten games played results:
+                    <div id="matchHistCanvasDiv">
+                        <div id="leagueMatchHistory"></div>
+                        <div id="gameResultsPie"></div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div id="contactDiv" class="container-custom">
+                <div id="contactContent" class="content">
+                    <a id="contact"></a><br/>
+                    <h2>Contact</h2>
+                    <br/>
+                    <hr/>					
+                    <br/>
+                    <div id="linkedinInfoDiv">
+                        <a href="https://www.linkedin.com/in/ajbiol" class="link">
+                            https://www.linkedin.com/in/ajbiol</a>
+                    </div>
+                    <div id="emailInfoDiv">
+                        <a href="mailto:ajbiol@gmail.com" class="link">ajbiol@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+	</body>
+</html>
