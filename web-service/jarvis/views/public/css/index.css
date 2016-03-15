@@ -21,13 +21,15 @@ hr {
 }
 
 /* Custom nav bar start */
-.navbar-custom {
+#navContainer {
     background-color:#ffffff;
     border-radius:0;
     margin-bottom: 0px;
-    width: 70%;
+}
+
+.navbar-custom {
+    width : 70%;
     margin: 0 auto;
-    box-shadow: 2px 2px 1px #686868;
 }
 
 .navbar-custom .navbar-toggle {
@@ -143,3 +145,17 @@ h2 {
 }
 
 /* Login content end */
+
+#wrapper {
+    min-height : 100%;
+    position : relative;
+}
+
+.panel-footer {
+    width : 100%;
+}
+
+#footerContainer {
+    width : 70%;
+    margin: 0 auto;
+}

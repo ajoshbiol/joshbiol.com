@@ -12,7 +12,8 @@
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "mysql": "^2.10.2",
-    "jsonwebtoken": "~5.7.0"
+    "jsonwebtoken": "~5.7.0",
+    "jade": "~1.11.0"
   },
   "private": true
 }

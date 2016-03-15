@@ -20,8 +20,11 @@ var app = express();
 
 // For our jsonwebtoken
 app.set('superSecret', configs.jwtSecret);
+// For templating
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
 
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views/public'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://joshbiol.com");
@@ -36,6 +39,18 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
+
+app.get('/', function(req, res) {
+    res.render('welcome');
+});
+
+app.get('/login', function(req, res) {
+    res.render('signin');
+});
+
+app.get('/fun', function(req, res) {
+    res.render('fun');
+});
 
 // Authenticate
 app.post('/api/authenticate', function(req, res) {
@@ -139,11 +154,19 @@ app.get('/test', function(req, res) {
     res.send('you rock!');
 });
 
-var options = {
-    key : fs.readFileSync(configs.sslCert.key),
-    cert : fs.readFileSync(configs.sslCert.cert)
-};
+if (process.env.NODE_ENV != 'development') {
+    var options = {
+        key : fs.readFileSync(configs.sslCert.key),
+        cert : fs.readFileSync(configs.sslCert.cert)
+    };
 
-https.createServer(options, app).listen(3000, function() {
-    console.log('Started https server.');
-});
+    https.createServer(options, app).listen(3000, function() {
+        console.log('Started https server.');
+    });
+}
+else {
+
+    http.createServer(app).listen(3000, function() {
+        console.log('Started http server.');
+    });
+}
