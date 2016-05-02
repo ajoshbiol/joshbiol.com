@@ -6,16 +6,22 @@ function validateCredentials(email, password) {
 			if (xhr.status === 200) {
 				
 				var json = JSON.parse(xhr.responseText);
-				
-				document.getElementById('validationResults').innerHTML = JSON.stringify(json, null, 2);
+
+                document.getElementById("loginMessage").innerHTML = 'Valid login!'; 
+                document.cookie = 'token=' + json.token; 
 			}
+            else if (xhr.status === 401) {
+                // Failed the authentication
+                document.getElementById("loginMessage").innerHTML = 
+                    'Invalid credentials. Please try again.';
+            }
 			else {
-				document.getElementById("validationResults").innerHTML = 
+				document.getElementById("loginMessage").innerHTML = 
 					'Status Code: ' + xhr.status;
 			}
 		}
 		else {
-			document.getElementById("validationResults").innerHTML = 
+			document.getElementById("loginMessage").innerHTML = 
 				'Loading... Please wait...';
 		}
 	};
@@ -29,12 +35,10 @@ function loaded() {
         event.preventDefault();
         var email = document.getElementById('address').value;
         var password = document.getElementById('secret').value;
-        console.log(email + ' ' + password);
         
         validateCredentials(email, password);
         
-        document.getElementById('address').innerHTML = '';
-        document.getElementById('secret').innerHTML = '';
+        document.getElementById('loginForm').reset();
     });
 }
 

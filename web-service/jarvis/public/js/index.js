@@ -50,9 +50,7 @@ function drawGameResults() {
 			if (xhr.status === 200) {
 				
 				var json = JSON.parse(xhr.responseText);
-				
 				drawGamesPieChart(json['games']);
-				
 				document.getElementById('leagueMatchHistory').innerHTML = '';
 			}
 			else {
@@ -67,10 +65,6 @@ function drawGameResults() {
 	};
 	xhr.open("GET", 'https://joshbiol.com/api/preview/matchHistory', true);
 	xhr.send();
-}
-
-function drawRiotData() {
-    drawGameResults();
 }
 
 /* End Riot section */
@@ -172,10 +166,14 @@ function drawWeightData() {
 
 /* End Weight section */
 
+function loadGraphs() {
+    drawWeightData();
+    drawGameResults();
+}
 
 window.onload = function() {
-    google.load('visualization', '1.1', {packages: ['line'], callback: drawWeightData});
-    google.load("visualization", "1", {packages:["corechart"], callback: drawRiotData});
+    google.charts.load('current', {packages: ['line', 'corechart']});
+    google.charts.setOnLoadCallback(loadGraphs);
 };
 
 if (document.addEventListener) {

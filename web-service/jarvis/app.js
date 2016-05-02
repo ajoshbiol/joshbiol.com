@@ -24,7 +24,7 @@ app.set('superSecret', configs.jwtSecret);
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
-app.use(express.static(__dirname + '/views/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://joshbiol.com");
@@ -44,13 +44,26 @@ app.get('/', function(req, res) {
     res.render('welcome');
 });
 
-app.get('/login', function(req, res) {
-    res.render('signin');
+app.get('/portfolio', function(req, res) {
+    res.render('notyetimplemented');
 });
 
 app.get('/fun', function(req, res) {
     res.render('fun');
 });
+
+app.get('/dashboard', function(req, res) {
+    res.render('signin');
+});
+
+app.get('/contact', function(req, res) {
+    res.render('notyetimplemented');
+});
+
+app.get('/login', function(req, res) {
+    res.render('signin');
+});
+
 
 // Authenticate
 app.post('/api/authenticate', function(req, res) {
@@ -60,19 +73,20 @@ app.post('/api/authenticate', function(req, res) {
     var body = req.body;
 
     if (JSON.stringify(body) === '{}' || body == null || body == undefined) {
-        return res.status(401).send({ message : 'Missing body.' });
+        return res.status(401).send({ success : false, 
+            message : 'Missing body.' });
     }
 
     if (body.email == undefined || body.password == undefined) {
-        res.writeHead(401);
-        return res.end('Error');
+        return res.status(401).send({ success : false, 
+            message : 'Missing credentials.' });
     }
 
     users.isValidUser(body.email, body.password, function(err, user) {
         
         if (err) {
-            res.writeHead(401);
-            return res.end(err);
+            return res.status(401).send({ success : false, 
+                message : 'Invalid credentials.' });
         }
         else {
 
@@ -123,6 +137,7 @@ app.get('/api/preview/recentWeights', function(req, res) {
 
 app.use(function(req, res, next) {
 
+    console.log(req.cookie);
     var token = req.body.token || req.query.token || 
         req.headers['x-access-token'];
 

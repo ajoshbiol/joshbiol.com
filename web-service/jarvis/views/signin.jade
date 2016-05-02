@@ -4,26 +4,25 @@ html(lang="en")
         include ./head.jade
         script(src="js/login.js")
     body
-        include ./navbar.jade
-        br
-        #signinDiv.container-custom
-            #signinContent.content
-                h2 Sign in to JDash
-                br
-                | Please enter your credentials.
-                br
-                br
-                hr
-                br
-                form#loginForm(role="form")
-                    | Username or email address
-                    #form-group
-                        input#address.form-control(type="email", required, autofocus)
+        #wrapper
+            include ./navbar.jade
+            br
+            #signinDiv.container-custom
+                #signinContent.content
+                    h2 Sign in
                     br
-                    | Password
-                    #form-group
-                        input#secret.form-control(type="password", required)
+                    #loginMessage Please enter your credentials.
                     br
-                    #validationResults
-                    button(type="submit", class="btn btn-lg btn-primary btn-block") Sign in
-
+                    hr
+                    br
+                    form#loginForm(role="form")
+                        | Username or email address
+                        #form-group
+                            input#address.form-control(type="email", required, autofocus)
+                        br
+                        | Password
+                        #form-group
+                            input#secret.form-control(type="password", required)
+                        br
+                        button(type="submit", class="btn btn-lg btn-primary btn-block") Sign in
+        include ./footer.jade                    

@@ -10,7 +10,7 @@ body {
     width: 100%;
     height: 100%;
 	overflow-x: hidden;
-    font-family: -moz-fixed;
+    font-family : 'Roboto', sans-serif;
     background-color: #9ab1cb;
 }
 
