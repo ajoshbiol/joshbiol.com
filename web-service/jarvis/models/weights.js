@@ -5,11 +5,13 @@ module.exports = {
 	
 	getRecentWeights : function(callback) {
 		var connection = mysql.createConnection(configs.mysqlConn);
-		var query = 'SELECT * FROM weights ORDER BY datetime DESC LIMIT 5;';
+		var query = 'SELECT * FROM Jarvis.weights ORDER BY datetime ' + 
+            'DESC LIMIT 6;';
 		
 		connection.query(query, function(err, rows, fields) {
-			if (err)
+			if (err) {
 				return callback(err);
+            }
 			
 			var records = [];
 			

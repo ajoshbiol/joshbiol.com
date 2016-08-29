@@ -5,7 +5,6 @@ module.exports = {
 	
 	getMatchHistory : function(callback) {
 		https.request(configs.matchHistoryUrl, function(response) {
-			
 			var dataCollected = [];
 			
 			response.on('data', function(data) {

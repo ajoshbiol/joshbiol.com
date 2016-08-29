@@ -27,7 +27,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://joshbiol.com");
+  res.header("Access-Control-Allow-Origin", configs.corsAllow);
   res.header('Access-Control-Allow-Methods', 'GET,POST');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if ('OPTIONS' == req.method) {
@@ -107,7 +107,7 @@ app.get('/api/preview/matchHistory', function(req, res) {
 	console.log('match history request received');
 	riotHandler.getMatchHistory(function(err, data) {
 		if (err) {
-			res.writeHead(400);
+			res.writeHead(500);
 			return res.end(err.message);
 		}	
 		
@@ -123,8 +123,8 @@ app.get('/api/preview/recentWeights', function(req, res) {
 	
 	weightHandler.getRecentWeights(function(err, data) {
 		if (err) {
-			res.writeHead(400);
-			return res.end({ Error : err });			
+			res.writeHead(500);
+			return res.end(err.message);			
 		}
 		
 		console.log('returning weight data!');

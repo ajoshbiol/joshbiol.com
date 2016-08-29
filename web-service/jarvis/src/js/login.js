@@ -41,5 +41,3 @@ function loaded() {
         document.getElementById('loginForm').reset();
     });
 }
-
-window.addEventListener('load', loaded, false);

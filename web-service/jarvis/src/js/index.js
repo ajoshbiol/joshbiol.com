@@ -3,8 +3,11 @@
 var m_gamesPieChart = {};
 
 function redrawGamesPieChart() {
-	m_gamesPieChart['chart'].draw(m_gamesPieChart['data'], 
-		m_gamesPieChart['options']);
+    console.log(m_gamesPieChart.chart);
+    if (m_gamesPieChart.chart) {
+        m_gamesPieChart.chart.draw(m_gamesPieChart.data, 
+            m_gamesPieChart.options);
+    }
 }
 
 function drawGamesPieChart(games) {
@@ -36,9 +39,9 @@ function drawGamesPieChart(games) {
 
 	chart.draw(data, options);
 	
-	m_gamesPieChart['options'] = options;
-	m_gamesPieChart['data'] = data;
-	m_gamesPieChart['chart'] = chart;	
+	m_gamesPieChart.options = options;
+	m_gamesPieChart.data = data;
+	m_gamesPieChart.data = chart;	
 }
 
 function drawGameResults() {
@@ -50,7 +53,7 @@ function drawGameResults() {
 			if (xhr.status === 200) {
 				
 				var json = JSON.parse(xhr.responseText);
-				drawGamesPieChart(json['games']);
+				drawGamesPieChart(json.games);
 				document.getElementById('leagueMatchHistory').innerHTML = '';
 			}
 			else {
@@ -63,7 +66,7 @@ function drawGameResults() {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'https://joshbiol.com/api/preview/matchHistory', true);
+	xhr.open("GET", serviceUrl + '/api/preview/matchHistory', true);
 	xhr.send();
 }
 
@@ -74,8 +77,10 @@ function drawGameResults() {
 var m_weightChart = {};
 
 function resizeWeightChart() {
-	m_weightChart['chart'].draw(m_weightChart['data'], 
-		m_weightChart['options']);
+    if (m_weightChart.chart) {
+        m_weightChart.chart.draw(m_weightChart.data, 
+            m_weightChart.options);
+    }
 }
 
 function getWeightData(callback) {
@@ -87,7 +92,7 @@ function getWeightData(callback) {
 				var json = JSON.parse(xhr.responseText);
 				
 				document.getElementById('weightDiv').innerHTML = '';
-				callback(json['data']);
+				callback(json.data);
 			}
 			else {
 				document.getElementById("weightDiv").innerHTML = 
@@ -99,15 +104,15 @@ function getWeightData(callback) {
 				'Loading... Please wait...';
 		}
 	};
-	xhr.open("GET", 'https://joshbiol.com/api/preview/recentWeights', 
+	xhr.open("GET", serviceUrl + '/api/preview/recentWeights', 
 		true);
 	xhr.send();
 }
 
 function getDateRange(data) {
 	
-	var mostRecent = new Date(data[data.length -1]['datetime']);
-	var leastRecent = new Date(data[0]['datetime']);
+	var mostRecent = new Date(data[data.length -1].datetime);
+	var leastRecent = new Date(data[0].datetime);
 	
 	var mostRecentTime = mostRecent.getTime();
 	var leastRecentTime = leastRecent.getTime();
@@ -122,9 +127,9 @@ function drawWeightChart(weightData) {
 	var temp = [];
 	
 	for(var i = 0; i < weightData.length; i++) {
-		var date = new Date(weightData[i]['datetime']);
+		var date = new Date(weightData[i].datetime);
 		
-		temp[i] = [date,weightData[i]['weight']];
+		temp[i] = [date,weightData[i].weight];
 	}
 	
 	var data = new google.visualization.DataTable();
@@ -146,9 +151,9 @@ function drawWeightChart(weightData) {
 	var chart = new google.charts.Line(document.getElementById("weightGoogChartsDiv"));
     chart.draw(data, options);
 	
-	m_weightChart['options'] = options;
-	m_weightChart['data'] = data;
-	m_weightChart['chart'] = chart;	
+	m_weightChart.options = options;
+	m_weightChart.data = data;
+	m_weightChart.chart = chart;	
 }
 
 function drawWeightData() {
@@ -157,7 +162,7 @@ function drawWeightData() {
 		drawWeightChart(data);
 		
 		document.getElementById("currWeight").innerHTML = 
-			data[data.length -1]['weight'];
+			data[data.length -1].weight;
 			
 		document.getElementById("diffDays").innerHTML = 
 			getDateRange(data).toString();
