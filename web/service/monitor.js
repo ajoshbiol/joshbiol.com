@@ -33,11 +33,11 @@ function sendMail() {
 }
 
 // forever process configs
-var child = new (forever.Monitor)('../jarvis/app.js', {
+var child = new (forever.Monitor)('./app.js', {
     max: 3,
     args: [],
     watch: true,
-    watchDirectory: '../jarvis',
+    watchDirectory: '.',
     
     //
     // Log files and associated logging options for this instance
@@ -48,7 +48,7 @@ var child = new (forever.Monitor)('../jarvis/app.js', {
 });
 
 child.on('exit', function() {
-    console.log('Jarvis-service has exited.');
+    console.log('Service has exited.');
     // modify mail data subject and text
     sendMail();
 });
@@ -58,7 +58,7 @@ child.on('watch:restart', function(info) {
 });
 
 child.on('restart', function() {
-    console.log('Jarvis-service has restarted.');
+    console.log('Service has restarted.');
     // modify mail data subject and text
     sendMail();
 });

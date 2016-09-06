@@ -20,13 +20,9 @@ var app = express();
 
 // For our jsonwebtoken
 app.set('superSecret', configs.jwtSecret);
-// For templating
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
-
-app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
+  console.log(req.get('origin'));
   res.header("Access-Control-Allow-Origin", configs.corsAllow);
   res.header('Access-Control-Allow-Methods', 'GET,POST');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -39,31 +35,6 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
-
-app.get('/', function(req, res) {
-    res.render('welcome');
-});
-
-app.get('/portfolio', function(req, res) {
-    res.render('notyetimplemented');
-});
-
-app.get('/fun', function(req, res) {
-    res.render('fun');
-});
-
-app.get('/dashboard', function(req, res) {
-    res.render('signin');
-});
-
-app.get('/contact', function(req, res) {
-    res.render('notyetimplemented');
-});
-
-app.get('/login', function(req, res) {
-    res.render('signin');
-});
-
 
 // Authenticate
 app.post('/api/authenticate', function(req, res) {

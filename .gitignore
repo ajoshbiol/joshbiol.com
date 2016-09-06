@@ -1,14 +1,5 @@
 # Ignore list
 *.swp
-deployment.sh
-web-service/jarvis/certs
-web-service/jarvis/configs.js
-web-service/jarvis/node_modules
-web-service/gulp/node_modules
-web-service/monitor/node_modules
-web-service/jarvis/public
-web-service/jarvis/configs/
-web-service/jarvis/configs.js
-web-service/jarvis/src/js/configs.js
-web-service/jarvis/src/js/configs
-
+node_modules/
+configs/
+web/public/*

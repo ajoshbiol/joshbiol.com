@@ -1,0 +1,52 @@
+#body {
+    font-family : 'Roboto', sans-serif;
+}
+
+hr.blue {
+    border-color : #629CFD;
+    width : 30%;
+}
+
+#interestsLabel {
+    padding : 5%;
+    text-align : center;
+    width : 40%;
+    margin : 0 auto;
+    font-size : 20px;
+}
+
+#cards {
+    width : 100%;
+}
+
+#weightContent {
+    padding : 5%;
+}
+
+#lolContent {
+    padding : 5%;
+}
+
+@media (min-width:801px) { 
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    #interestsLabel {
+        padding : 5%;
+        text-align : center;
+        width : 40%;
+        margin : 0 auto;
+        font-size : 22px;
+    }
+
+    #cards {
+        width : 80%;
+        margin : 0 auto;
+    }
+
+    #weightContent {
+        padding : 7%;
+    }
+
+    #lolContent {
+        padding : 7%;
+    }
+}
