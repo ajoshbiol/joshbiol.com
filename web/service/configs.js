@@ -12,4 +12,11 @@ configs.mysqlConn = {
 
 configs.matchHistoryUrl = '';
 
+configs.smtp = {
+    emailTo : '',
+    emailFrom : '',
+    user : '',
+    pass : ''
+};
+
 module.exports = configs;

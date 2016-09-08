@@ -1,5 +1,6 @@
 var mailer = require('nodemailer');
 var forever = require('forever-monitor')
+var configs = require('./configs')
 
 // email configs
 var options = {
@@ -7,8 +8,8 @@ var options = {
     port: 465,
     secure: true, // use ssl
     auth: {
-        user: 'ajbiol@gmail.com',
-        pass: 'iwyeuwrbjgscmvst'
+        user: configs.smtp.user,
+        pass: configs.smtp.pass
     }
 }
 
@@ -16,9 +17,9 @@ var options = {
 var transporter = mailer.createTransport(options);
 
 var mailData = {
-    from: 'ajbiol@gmail.com ',
-    to: 'ajbiol@gmail.com',
-    subject: 'joshbiol.com service restart',
+    from: configs.smtp.emailTo,
+    to: configs.smtp.emailFrom,
+    subject: process.env.NODE_ENV + ' joshbiol.com service restart',
     text: 'If this was unintentional please look into this restart.',
 }
 
