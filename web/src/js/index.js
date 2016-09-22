@@ -119,6 +119,9 @@ function getWeightData($http, callback) {
 
 // Function to draw line chart displaying change in weight over time
 function drawWeightGraph(data) {
+    if (data === null || data === undefined)
+        return;
+
     var temp = [];
 
     data.forEach(function(entry) {
@@ -227,4 +230,7 @@ function drawLoLWinDonut(data) {
 // Function to load google chart library after window load
 window.onload = function() {
     google.charts.load('current', { packages : ['line', 'corechart'] });
+    google.charts.setOnLoadCallback(function() {
+        angular.bootstrap(document.body, ['Portfolio']);
+    });
 };

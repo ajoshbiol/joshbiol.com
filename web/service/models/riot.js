@@ -1,10 +1,14 @@
 var https = require('https');
-var configs = require('../configs.js');
+var configs = require('../configs');
 
 module.exports = {
 	
 	getMatchHistory : function(callback) {
-		https.request(configs.matchHistoryUrl, function(response) {
+
+        var query = 'https://na.api.pvp.net/api/lol/na/v1.3/game/' + 
+            'by-summoner/41798816/recent?api_key=' + configs.riotKey;
+
+		https.request(query, function(response) {
 			var dataCollected = [];
 			
 			response.on('data', function(data) {

@@ -11,10 +11,11 @@ if (process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'qa' &&
 }
 
 // Init configs
-var configs = require('./configs.js');
-var riotHandler = require('./models/riot.js');
-var weightHandler = require('./models/weights.js');
-var users = require('./models/users.js');
+var configs = require('./configs');
+var riotHandler = require('./models/riot');
+var weightHandler = require('./models/weights');
+var users = require('./models/users');
+var github = require('./models/github');
 
 var app = express();
 
@@ -102,6 +103,15 @@ app.get('/api/preview/recentWeights', function(req, res) {
 		res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
 		return res.end(data);
 	});
+});
+
+// Get most recent commits
+app.get('/api/preview/recentGithubActivity', function(req, res) {
+	console.log('get recent github activity received');
+    
+
+    // TODO
+    github.getPublicRepositories(function() {});
 });
 
 /* All calls below needs to have the proper token to work */

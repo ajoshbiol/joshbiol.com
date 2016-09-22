@@ -11,16 +11,12 @@
         
     </head>
 
-    <body ng-app="Portfolio" ng-cloak>
-        <!--
-        Your HTML content here
-        -->  
+    <body>
         <md-content>
             <md-toolbar>
                 <span flex></span>
                 <h2 class="md-toolbar-tools">
-                    <span class="md-flex">joshbiol.com</span>
-                </h2>
+                    <img src="img/ic_face_white_36px.svg">&nbsp;&nbsp;JOSH BIOL</h2>
             </md-toolbar>
         </md-content>
 
@@ -30,6 +26,32 @@
                     <hr class="blue"> 
                     <span>Interests</span>
                 </div>
+                <!-- GitHub Card coming soon
+                <md-card md-theme="default">
+                    <md-card-header>
+                        <md-card-avatar>
+                            <img src="img/ic_code_black_24px.svg">
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Software Development</span>
+                            <span class="md-subhead">Last commit was </span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-divider></md-divider>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">GitHub Projects</span>
+                            <span class="md-subhead">{{weightTrend}}</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media">
+                            </div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-content>
+                    </md-card-content>
+                </md-card>
+                -->
                 <!-- Health and Fitness card -->
                 <md-card md-theme="default">
                     <md-card-header>
@@ -41,6 +63,7 @@
                             <span class="md-subhead">{{weightLastUpdated}}</span>
                         </md-card-header-text>
                     </md-card-header>
+                    <md-divider></md-divider>
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">
@@ -53,7 +76,6 @@
                             </div>
                         </md-card-title-media>
                     </md-card-title>
-                    <md-divider></md-divider>
                     <md-card-content>
                         <div id="weightContent">
                             <div id="weightChart"></div>
@@ -71,6 +93,7 @@
                             <span class="md-subhead">{{lolLastUpdate}}</span>
                         </md-card-header-text>
                     </md-card-header>
+                    <md-divider></md-divider>
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">League of Legends</span>
@@ -82,7 +105,6 @@
                             </div>
                         </md-card-title-media>
                     </md-card-title>
-                    <md-divider></md-divider>
                     <md-card-content>
                         <div id="lolContent">
                             Most recent 10 game results
