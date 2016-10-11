@@ -14,9 +14,6 @@ module.exports = {
             }
         }
 
-        var agent = new https.Agent({ KeepAlive : false });
-        options.agent = agent;
-
         https.request(options, function(response) {
             var dataCollected = [];
             
