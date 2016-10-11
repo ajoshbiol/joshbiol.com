@@ -5,10 +5,19 @@ module.exports = {
 
     getPublicRepositories : function(callback) {
     
-        var query = 'https://api.github.com/users/ajoshbiol/repos';
-        // TODO add header
+        var options = {
+            hostname : 'api.github.com',
+            path: '/users/ajoshbiol/repos',
+            method : 'GET',
+            headers : {
+                'user-agent' : 'ajoshbiol'
+            }
+        }
 
-        https.request(query, function(response) {
+        var agent = new https.Agent({ KeepAlive : false });
+        options.agent = agent;
+
+        https.request(options, function(response) {
             var dataCollected = [];
             
             response.on('data', function(data) {
