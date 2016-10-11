@@ -3,7 +3,6 @@ var https = require('https');
 var http = require('http');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var jwt = require('jsonwebtoken');
 
 if (process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'qa' &&
     process.env.NODE_ENV != 'production') {
@@ -19,12 +18,8 @@ var github = require('./models/github');
 
 var app = express();
 
-// For our jsonwebtoken
-app.set('superSecret', configs.jwtSecret);
-
 app.use(function(req, res, next) {
-  console.log(req.get('origin'));
-  res.header("Access-Control-Allow-Origin", configs.corsAllow);
+  res.header('Access-Control-Allow-Origin', configs.corsAllow);
   res.header('Access-Control-Allow-Methods', 'GET,POST');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if ('OPTIONS' == req.method) {
@@ -36,43 +31,6 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
-
-// Authenticate
-app.post('/api/authenticate', function(req, res) {
-    console.log('authenticate received');
-    console.log(JSON.stringify(req.body, null, 2));
-
-    var body = req.body;
-
-    if (JSON.stringify(body) === '{}' || body == null || body == undefined) {
-        return res.status(401).send({ success : false, 
-            message : 'Missing body.' });
-    }
-
-    if (body.email == undefined || body.password == undefined) {
-        return res.status(401).send({ success : false, 
-            message : 'Missing credentials.' });
-    }
-
-    users.isValidUser(body.email, body.password, function(err, user) {
-        
-        if (err) {
-            return res.status(401).send({ success : false, 
-                message : 'Invalid credentials.' });
-        }
-        else {
-
-            // We have a valid user, let us give them a token!
-            var token = jwt.sign(user, app.get('superSecret'), 
-                { expiresIn : '1h' }, function(token) {
-                             
-                console.log('jwtoken: ' + token);                       
-                return res.status(200).json({ success: true, 
-                    message: 'Welcome Josh!', token: token});
-            });
-        }    
-    });
-});
 
 // Get match history
 app.get('/api/preview/matchHistory', function(req, res) {
@@ -109,45 +67,15 @@ app.get('/api/preview/recentWeights', function(req, res) {
 app.get('/api/preview/recentGithubActivity', function(req, res) {
 	console.log('get recent github activity received');
     
-
-    // TODO
-    github.getPublicRepositories(function() {});
-});
-
-/* All calls below needs to have the proper token to work */
-
-app.use(function(req, res, next) {
-
-    console.log(req.cookie);
-    var token = req.body.token || req.query.token || 
-        req.headers['x-access-token'];
-
-    if (token) {
-
-        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-            
-            if (err)
-                return res.json({ success : false, message : 'Failed to ' + 
-                    'authenticate token.'});
-            else {
-                req.decoded = decoded;
-                next();
-            }
-        });
+    github.getPublicRepositories(function(err, response) {
+        if (err) {
+            res.writeHead(500, {"Content-Type": "text/html; charset=utf-8"});
+            return res.end(err); 
+        }
     
-    }
-    else {
-        // There is no token
-        return res.status(403).send({
-            success : false,
-            message : 'No token provided.'
-        });
-    }
-});
-
-app.get('/test', function(req, res) {
-
-    res.send('you rock!');
+        res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+        return res.end(response); 
+    });
 });
 
 if (process.env.NODE_ENV != 'development') {
@@ -161,7 +89,6 @@ if (process.env.NODE_ENV != 'development') {
     });
 }
 else {
-
     http.createServer(app).listen(3000, function() {
         console.log('Started http server.');
     });

@@ -1,1 +1,1 @@
-serviceUrl = 'https://joshbiol.com';
+serviceUrl = '';

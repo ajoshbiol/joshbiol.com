@@ -11,10 +11,7 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
-    "forever-monitor": "^1.7.0",
-    "jsonwebtoken": "~5.7.0",
-    "mysql": "^2.10.2",
-    "nodemailer": "^2.6.0"
+    "mysql": "^2.10.2"
   },
   "private": true
 }
