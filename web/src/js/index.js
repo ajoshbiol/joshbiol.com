@@ -28,6 +28,14 @@ app.controller('InterestCtrl', ['$scope', '$http', '$window',
         drawWeightGraph(data.data);
     });
 
+    getGithubData($http, function(err, data) {
+        if (err)
+            return console.error(err);
+        $scope.githubData = data.repos;
+
+        console.log($scope.githubData);
+    });
+
     win.bind('resize', function() {
 
         if ($scope.weightData !== null) 
@@ -172,7 +180,7 @@ function setMostRecentGameResults($scope) {
     else result = ' loss';
 
     var d = new Date(mrGame.createDate); 
-    $scope.mostRecentLoLResult = 'Last game played on ' + 
+    $scope.mostRecentLoLResult = 'Most recent game played on ' + 
         getMonthName(d.getMonth()) + ' ' + d.getDate() + 
         ', ' + d.getFullYear() + ' resulted in a ' + result;
 
@@ -225,6 +233,25 @@ function drawLoLWinDonut(data) {
         document.getElementById('winsChart'));
 
     chart.draw(table, options);
+}
+
+// Function to retrieve github data
+function getGithubData($http, callback) {
+    $http({
+        method : 'GET',
+        url : serviceUrl + '/api/preview/recentGithubActivity'
+    })
+    .then(function success(response) {
+        return callback(null, response.data);
+    }, function error(response) {
+        return callback(response);
+    });
+}
+
+// Function to set last update dates
+function setLastCodeCommits($scope) {
+    
+    // TODO
 }
 
 // Function to load google chart library after window load

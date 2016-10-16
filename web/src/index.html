@@ -26,7 +26,6 @@
                     <hr class="blue"> 
                     <span>Interests</span>
                 </div>
-                <!-- GitHub Card coming soon
                 <md-card md-theme="default">
                     <md-card-header>
                         <md-card-avatar>
@@ -40,7 +39,7 @@
                     <md-divider></md-divider>
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-headline">GitHub Projects</span>
+                            <span class="md-headline">Personal Projects</span>
                             <span class="md-subhead">{{weightTrend}}</span>
                         </md-card-title-text>
                         <md-card-title-media>
@@ -49,9 +48,37 @@
                         </md-card-title-media>
                     </md-card-title>
                     <md-card-content>
+                        <div id="softwareDevContent">
+                            <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="project in githubData">
+                            <div class="md-list-item-text">
+                                <h3>{{project.name}}</h3>
+                                <h4>{{project.url}}</h4>
+                                <div class="frame">
+                                    <div class="left">
+                                        <p>
+                                        Description: {{project.desc}}
+                                        <br>
+                                        Language: {{project.language}}
+                                        </p>
+                                    </div>    
+                                    <div class="right">
+                                        <p>
+                                        Created on {{project.created_at}}
+                                        <br>
+                                        Updated on {{project.updated_at}}
+                                        <br>
+                                        Pushed on {{project.pushed_at}}
+                                        </p>
+                                    </div>    
+                                </div>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                            </md-list-item>
+                            </md-list>
+                        </div>
                     </md-card-content>
                 </md-card>
-                -->
                 <!-- Health and Fitness card -->
                 <md-card md-theme="default">
                     <md-card-header>
@@ -67,7 +94,7 @@
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">
-                                Weighed {{mrWeight}} lbs on {{mrWeighingDate}}</span>
+                                Weight Weighed {{mrWeight}} lbs on {{mrWeighingDate}}</span>
                             <span class="md-subhead">{{weightTrend}}</span>
                         </md-card-title-text>
                         <md-card-title-media>

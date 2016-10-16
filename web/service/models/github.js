@@ -38,6 +38,7 @@ module.exports = {
                     info["updated_at"] = githubInfo[i]["updated_at"];
                     info["pushed_at"] = githubInfo[i]["pushed_at"];
                     info["watchers"] = githubInfo[i]["watchers_count"];
+                    info["stars"] = githubInfo[i]["stargazers_count"];
                     retInfo["repos"].push(info);
                 }
 
