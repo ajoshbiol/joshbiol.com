@@ -4,7 +4,8 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
-if (process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'qa' &&
+if (process.env.NODE_ENV != 'development' && 
+    process.env.NODE_ENV != 'qa' &&
     process.env.NODE_ENV != 'production') {
     process.exit();
 }
@@ -21,7 +22,8 @@ var app = express();
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', configs.corsAllow);
   res.header('Access-Control-Allow-Methods', 'GET,POST');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", 
+          "Origin, X-Requested-With, Content-Type, Accept");
   if ('OPTIONS' == req.method) {
         res.sendStatus(200);
     } else {

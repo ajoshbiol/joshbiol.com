@@ -7,10 +7,10 @@ module.exports = {
     
         var options = {
             hostname : 'api.github.com',
-            path: '/users/ajoshbiol/repos',
+            path: '/users/' + configs.github.username + '/repos',
             method : 'GET',
             headers : {
-                'user-agent' : 'ajoshbiol'
+                'user-agent' : configs.github.username
             }
         }
 
@@ -23,7 +23,25 @@ module.exports = {
             
             response.on('end', function(data) {
                 dataCollected.push(data);
-                return callback(null, dataCollected.join(''));
+
+                var githubInfo = JSON.parse(dataCollected.join(''));
+
+                var retInfo = {};
+                retInfo["repos"] = []
+                for (var i = 0; i < githubInfo.length; i++) {
+                    var info = {};
+                    info["name"] = githubInfo[i]["name"];
+                    info["url"] = githubInfo[i]["html_url"];
+                    info["desc"] = githubInfo[i]["description"];
+                    info["language"] = githubInfo[i]["language"];
+                    info["created_at"] = githubInfo[i]["created_at"];
+                    info["updated_at"] = githubInfo[i]["updated_at"];
+                    info["pushed_at"] = githubInfo[i]["pushed_at"];
+                    info["watchers"] = githubInfo[i]["watchers_count"];
+                    retInfo["repos"].push(info);
+                }
+
+                return callback(null, JSON.stringify(retInfo));
             });
 
             response.on('error', function(err) {
