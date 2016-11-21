@@ -31,6 +31,10 @@ hr.blue {
     padding : 5%;
 }
 
+#projectName {
+    color : #3366CC;
+}
+
 .frame {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
