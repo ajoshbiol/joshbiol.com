@@ -14,7 +14,6 @@ if (process.env.NODE_ENV != 'development' &&
 var configs = require('./configs');
 var riotHandler = require('./models/riot');
 var weightHandler = require('./models/weights');
-var users = require('./models/users');
 var github = require('./models/github');
 
 var app = express();
