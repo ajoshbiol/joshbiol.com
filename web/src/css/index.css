@@ -35,6 +35,15 @@ hr.blue {
     color : #3366CC;
 }
 
+#linkToGithub {
+    text-align : right;
+}
+
+a { 
+    color: inherit; 
+    text-decoration : none;
+} 
+
 .frame {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;

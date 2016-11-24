@@ -33,7 +33,7 @@
                         </md-card-avatar>
                         <md-card-header-text>
                             <span class="md-title">Software Development</span>
-                            <span class="md-subhead">Last commit was </span>
+                            <span class="md-subhead">{{lastCommit}}</span>
                         </md-card-header-text>
                     </md-card-header>
                     <md-divider></md-divider>
@@ -61,9 +61,15 @@
                                         <p>
                                         Language: {{project.language}}
                                         <br>
-                                        Stars : {{project.stars}}
+                                        <span>
+                                            <img src="img/ic_star_black_18px.svg">
+                                            &nbsp;: {{project.stars}}
+                                        </span>
                                         <br>
-                                        Watchers : {{project.watchers}}
+                                        <span>
+                                            <img src="img/ic_remove_red_eye_black_18px.svg">
+                                            &nbsp;: {{project.watchers}}
+                                        </span>
                                         </p>
                                     </div>    
                                     <div class="right">
@@ -77,7 +83,11 @@
                                     </div>    
                                 </div>
                                 <br>
-                                <h4>{{project.url}}</h4>
+                                <div id="linkToGithub">
+                                    <h4>
+                                        <a href={{project.url}}>Explore details</a>
+                                    </h4>
+                                </div>
                                 <br>
                             </div>
                             <md-divider ng-if="!$last"></md-divider>
@@ -101,7 +111,7 @@
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">
-                                Weight Weighed {{mrWeight}} lbs on {{mrWeighingDate}}</span>
+                                Weighed {{mrWeight}} lbs on {{mrWeighingDate}}</span>
                             <span class="md-subhead">{{weightTrend}}</span>
                         </md-card-title-text>
                         <md-card-title-media>

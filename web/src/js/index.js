@@ -31,9 +31,17 @@ app.controller('InterestCtrl', ['$scope', '$http', '$window',
     getGithubData($http, function(err, data) {
         if (err)
             return console.error(err);
+        
+        // Change time format from ISO to Date
+        data.repos.forEach(function(element) {
+            element.created_at = (new Date(element.created_at)).toString(); 
+            element.updated_at = (new Date(element.updated_at)).toString(); 
+            element.pushed_at = (new Date(element.pushed_at)).toString(); 
+        });
+
         $scope.githubData = data.repos;
 
-        console.log($scope.githubData);
+        setLastCodeCommits($scope);
     });
 
     win.bind('resize', function() {
@@ -190,7 +198,7 @@ function setMostRecentGameResults($scope) {
     var span = now - d;
     var spanDays = Math.ceil(span / 1000 / 3600 / 24);
 
-    var updateString = 'Updated ' + spanDays + ' day';
+    var updateString = 'Last played ' + spanDays + ' day';
     
     if (spanDays == 1)
         updateString += ' ago';
@@ -251,7 +259,31 @@ function getGithubData($http, callback) {
 // Function to set last update dates
 function setLastCodeCommits($scope) {
     
-    // TODO
+    var latest = null;
+    $scope.githubData.forEach(function(element) {
+        if (latest === null) 
+            latest = element.updated_at;
+        else {
+            if (element.updated_at > latest) 
+                latest = element.updated_at;
+        }
+    });
+
+    if (latest !== null) {
+        var d = new Date(latest);
+        var now = new Date();
+
+        var span = now - d;
+        var spanDays = Math.ceil(span / 1000 / 3600 / 24);
+
+        var updateString = 'Last commit was ' + spanDays + ' day';
+    
+        if (spanDays == 1)
+            updateString += ' ago';
+        else updateString += 's ago';
+
+        $scope.lastCommit = updateString;
+    }
 }
 
 // Function to load google chart library after window load
