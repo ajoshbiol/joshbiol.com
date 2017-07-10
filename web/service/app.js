@@ -33,21 +33,6 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
 
-// Get match history
-app.get('/api/preview/matchHistory', function(req, res) {
-	console.log('match history request received');
-	riotHandler.getMatchHistory(function(err, data) {
-		if (err) {
-			res.writeHead(500);
-			return res.end(err.message);
-		}	
-		
-		console.log('sending match history!');
-		res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});	
-		return res.end(data);
-	});
-});
-
 // Get recent weights
 app.get('/api/preview/recentWeights', function(req, res) {
 	console.log('get recent weights request received');

@@ -6,15 +6,6 @@ app.controller('InterestCtrl', ['$scope', '$http', '$window',
 
     var win = angular.element($window);
 
-    getLoLData($http, function(err, data) {
-        if (err)
-            return console.error(err);
-        $scope.lolData = data;
-
-        setMostRecentGameResults($scope);
-        drawLoLWinDonut(data.games);
-    });
-
     getWeightData($http, function(err, data) {
         if (err)
             return console.error(err);
@@ -48,9 +39,6 @@ app.controller('InterestCtrl', ['$scope', '$http', '$window',
 
         if ($scope.weightData !== null) 
             drawWeightGraph($scope.weightData);
-
-        if ($scope.lolData !== null) 
-            drawLoLWinDonut($scope.lolData.games);
     });
 }]);
 
@@ -161,85 +149,6 @@ function drawWeightGraph(data) {
     };
 
     var chart = new google.charts.Line(document.getElementById("weightChart"));
-    chart.draw(table, options);
-}
-
-// Function to retrieve League of Legeds recent match history data
-function getLoLData($http, callback) {
-    $http({
-        method : 'GET',
-        url : serviceUrl + '/api/preview/matchHistory'
-    })
-    .then(function success(response) {
-        return callback(null, response.data);
-    }, function error(response) {
-        return callback(response);
-    });
-}
-
-// Function to set most recent game results
-function setMostRecentGameResults($scope) {
-
-    var mrGame = $scope.lolData.games[0];
-
-    var result;
-    if (mrGame.stats.win)
-        result = ' win';
-    else result = ' loss';
-
-    var d = new Date(mrGame.createDate); 
-    $scope.mostRecentLoLResult = 'Most recent game played on ' + 
-        getMonthName(d.getMonth()) + ' ' + d.getDate() + 
-        ', ' + d.getFullYear() + ' resulted in a ' + result;
-
-    
-    var now = new Date();
-
-    var span = now - d;
-    var spanDays = Math.ceil(span / 1000 / 3600 / 24);
-
-    var updateString = 'Last played ' + spanDays + ' day';
-    
-    if (spanDays == 1)
-        updateString += ' ago';
-    else updateString += 's ago';
-
-    $scope.lolLastUpdate = updateString;
-}
-
-// Function to draw a donut graph of match history result
-function drawLoLWinDonut(data) {
-    var wins = 0;
-    var losses = 0;
-
-    data.forEach(function(entry) {
-        if (entry.stats.win)
-            wins++;
-        else losses++;
-    });
-
-    var table = google.visualization.arrayToDataTable(
-        [['Result', 'Count'], ['Wins', wins], ['Losses', losses]]
-    );
-
-    var options = {
-        legend : {
-            position : 'bottom',
-            alignment : 'center'
-        },
-        pieHole : 0.4,
-        height : '100%',
-        weight : '100%',
-        margin : '0 auto',
-        chartArea : {
-            width : '100%',
-            height : '70%'
-        }
-    };
-
-    var chart = new google.visualization.PieChart(
-        document.getElementById('winsChart'));
-
     chart.draw(table, options);
 }
 
