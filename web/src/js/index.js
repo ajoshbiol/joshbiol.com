@@ -171,10 +171,11 @@ function setLastCodeCommits($scope) {
     var latest = null;
     $scope.githubData.forEach(function(element) {
         if (latest === null) 
-            latest = element.pushed_at;
+            latest = new Date(element.pushed_at);
         else {
-            if (element.pushed_at > latest) 
-                latest = element.pushed_at;
+            var temp = new Date(element.pushed_at);
+            if (temp.getTime() > latest.getTime()) 
+                latest = temp;
         }
     });
 
